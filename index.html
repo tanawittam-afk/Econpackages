@@ -6,7 +6,7 @@
 <title>แผนการเรียน 4 ปี · เศรษฐศาสตรบัณฑิต (ปัญหาพิเศษ ไม่มีวิชาโท)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700;800&family=Noto+Serif+Thai:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700;800&family=Noto+Serif+Thai:wght@600;700&family=Prompt:wght@700;800&display=swap" rel="stylesheet">
 <style>
   :root{
     /* Academic prestige — navy + gilt gold บนพื้นไอวอรี่ */
@@ -60,16 +60,16 @@
   .stat{padding:16px 22px;min-width:110px;flex:1;
     border-right:1px solid rgba(255,222,180,.2)}
   .stat:last-child{border-right:none}
-  .stat b{display:block;font-family:"Cormorant",Georgia,serif;font-size:2.1rem;
-    font-weight:700;color:var(--gold-bright);line-height:1}
-  .stat span{font-size:.78rem;color:#f6d4e2;letter-spacing:.01em}
+  .stat b{display:block;font-family:"Prompt","Noto Sans Thai",sans-serif;font-size:2.5rem;
+    font-weight:700;color:#fff;line-height:1}
+  .stat span{font-size:.82rem;color:#f6d4e2;letter-spacing:.01em}
   /* stat แถว 2: แตกรายละเอียด */
   .stat-detail-row{display:flex;flex-wrap:wrap;gap:0;margin-top:0;
     background:rgba(0,0,0,.12);border:1px solid rgba(255,222,180,.2);
     border-top:none;border-radius:0 0 16px 16px;overflow:hidden}
   .stat-detail-row .stat{padding:10px 16px;min-width:80px;font-size:.9em}
-  .stat-detail-row .stat b{font-size:1.45rem;color:var(--gold)}
-  .stat-detail-row .stat span{font-size:.68rem;color:rgba(255,255,255,.7)}
+  .stat-detail-row .stat b{font-size:1.7rem;color:#fff;font-family:"Prompt","Noto Sans Thai",sans-serif}
+  .stat-detail-row .stat span{font-size:.72rem;color:rgba(255,255,255,.85)}
   .stat-sep{width:100%;height:0;border:none;border-top:1px solid rgba(255,222,180,.2);flex-basis:100%}
   .stat-lbl{flex-basis:100%;padding:7px 18px 2px;font-size:.65rem;font-weight:800;
     letter-spacing:.1em;text-transform:uppercase;color:rgba(255,222,180,.6)}
@@ -467,12 +467,24 @@
   }
 
   /* ===== PROGRAM SWITCHER (สลับหลักสูตร) ===== */
-  .prog-switch{display:inline-flex;gap:0;margin-top:26px;background:rgba(255,255,255,.1);
-    border:1px solid rgba(255,222,180,.4);border-radius:30px;padding:4px;backdrop-filter:blur(3px)}
-  .prog-btn{border:none;background:transparent;color:#fbe3ee;font-family:inherit;font-weight:700;
-    font-size:.86rem;padding:9px 18px;border-radius:26px;cursor:pointer;transition:.2s;white-space:nowrap}
-  .prog-btn:hover{color:#fff}
-  .prog-btn.active{background:var(--gold);color:#3a2c08;box-shadow:0 3px 10px rgba(0,0,0,.2)}
+  /* wrapper สำหรับ scroll บนมือถือ */
+  .prog-switch-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;
+    margin-top:26px;padding-bottom:4px;
+    /* ซ่อน scrollbar แต่ยังเลื่อนได้ */
+    scrollbar-width:none}
+  .prog-switch-wrap::-webkit-scrollbar{display:none}
+  .prog-switch{display:inline-flex;gap:6px;
+    background:rgba(255,255,255,.1);
+    border:1px solid rgba(255,222,180,.4);border-radius:30px;
+    padding:4px;backdrop-filter:blur(3px);
+    /* ไม่ wrap — ให้ปุ่มเรียงแถวเดียว */
+    flex-wrap:nowrap;white-space:nowrap;min-width:max-content}
+  .prog-btn{border:2px solid rgba(255,222,180,.55);background:transparent;color:#fff;
+    font-family:inherit;font-weight:700;font-size:.93rem;padding:9px 18px;
+    border-radius:26px;cursor:pointer;transition:.2s;white-space:nowrap;flex-shrink:0}
+  .prog-btn:hover{border-color:rgba(255,222,180,.9);background:rgba(255,255,255,.1)}
+  .prog-btn.active{background:#fff;color:#16233f;border-color:#fff;
+    font-weight:800;box-shadow:0 3px 12px rgba(0,0,0,.2)}
   .prog-label{display:block;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;
     color:var(--gold-bright);font-weight:700;margin:24px 0 -8px}
 
@@ -526,11 +538,13 @@
     <p class="lead">เห็นภาพรวมทั้งหลักสูตรในที่เดียว — เรียนอะไรก่อน เรียนอะไรต่อ และวิชาไหนเป็นกุญแจปลดล็อกวิชาขั้นสูง · ติ๊กถูกวิชาที่เรียนแล้วเพื่อให้แถบด้านบนนับหน่วยกิตให้ · แตะการ์ดเพื่อดูเงื่อนไขและชื่อภาษาอังกฤษ</p>
 
     <span class="prog-label">เลือกหลักสูตร</span>
+    <div class="prog-switch-wrap">
     <div class="prog-switch" id="progSwitch">
       <button class="prog-btn active" data-prog-btn="A">1. ปัญหาพิเศษ (ไม่มีวิชาโท)</button>
       <button class="prog-btn" data-prog-btn="B">2. ปัญหาพิเศษ (มีวิชาโท)</button>
       <button class="prog-btn" data-prog-btn="C">3. สหกิจศึกษา (ไม่มีวิชาโท)</button>
       <button class="prog-btn" data-prog-btn="D">4. สหกิจศึกษา (มีวิชาโท)</button>
+    </div>
     </div>
 
     <!-- แถว 1: ตัวเลขรวม -->
