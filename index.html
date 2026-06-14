@@ -468,139 +468,253 @@
     .reveal{opacity:1;transform:none}
   }
 
-  /* ===== COOP TAB STYLES ===== */
+  /* ===== COOP TAB · เวอร์ชันสดใส ===== */
   .tab-coop-only{display:none}
   .tab-coop-only.prog-coop{display:inline-flex}
 
-  .coop-page-hero{background:linear-gradient(135deg,#0f4a44 0%,var(--sea) 55%,#1a7a71 100%);
-    border-radius:18px;padding:28px 28px 24px;margin-bottom:22px;color:#eafff9;
-    position:relative;overflow:hidden;box-shadow:0 10px 32px rgba(31,107,99,.28)}
-  .coop-page-hero::before{content:"";position:absolute;inset:0;
-    background-image:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1px);
-    background-size:20px 20px;pointer-events:none}
-  .coop-page-hero .ch-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;
-    font-weight:800;letter-spacing:.1em;text-transform:uppercase;background:var(--gold);
-    color:#3a2c08;padding:4px 13px;border-radius:20px;margin-bottom:12px;position:relative}
-  .coop-page-hero h2{font-family:"Noto Serif Thai",serif;font-size:clamp(1.4rem,3vw,2rem);
-    font-weight:700;color:#fff;margin-bottom:6px;position:relative}
-  .coop-page-hero p{font-size:.9rem;opacity:.88;line-height:1.6;max-width:68ch;position:relative}
-  .coop-stat-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;position:relative}
-  .coop-stat-pill{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.28);
-    border-radius:20px;padding:7px 16px;font-size:.82rem;font-weight:700;
-    backdrop-filter:blur(3px);display:flex;align-items:center;gap:7px}
-  .coop-stat-pill span{font-size:1.1rem}
+  /* palette เฉพาะแท็บสหกิจ */
+  .coop-wrap{--co-pink:#e0457f;--co-pink-soft:#fde4ee;--co-mint:#2fb89a;--co-mint-soft:#d8f5ee;
+    --co-sun:#f2a93b;--co-sun-soft:#fdeed2;--co-sky:#3d8bd4;--co-sky-soft:#dcebfa;
+    --co-grape:#7d5bbe;--co-grape-soft:#e9e1f7}
 
-  .coop-intl-banner{background:linear-gradient(135deg,var(--plum),#3a2558);color:#fff;
-    border-radius:12px;padding:13px 18px;margin-bottom:16px;font-size:.85rem;line-height:1.6;
-    display:none;position:relative}
+  /* ---------- HERO ---------- */
+  .coop-page-hero{position:relative;overflow:hidden;border-radius:24px;padding:34px 30px 30px;
+    margin-bottom:18px;color:#fff;
+    background:
+      radial-gradient(circle at 88% 12%,rgba(242,169,59,.55),transparent 42%),
+      radial-gradient(circle at 8% 95%,rgba(224,69,127,.5),transparent 45%),
+      linear-gradient(135deg,#13524b 0%,var(--sea) 50%,#1d8579 100%);
+    box-shadow:0 16px 42px rgba(31,107,99,.32)}
+  .coop-page-hero::before{content:"";position:absolute;inset:0;
+    background-image:radial-gradient(rgba(255,255,255,.1) 1.5px,transparent 1.5px);
+    background-size:22px 22px;pointer-events:none}
+  .coop-page-hero .ch-emoji{position:absolute;font-size:2.2rem;opacity:.9;pointer-events:none;
+    animation:coFloat 4s ease-in-out infinite}
+  .coop-page-hero .ce1{top:18px;right:30px;animation-delay:0s}
+  .coop-page-hero .ce2{top:60px;right:90px;font-size:1.5rem;animation-delay:.8s}
+  .coop-page-hero .ce3{bottom:26px;right:54px;font-size:1.8rem;animation-delay:1.5s}
+  @keyframes coFloat{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-12px) rotate(4deg)}}
+  .coop-page-hero .ch-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.74rem;
+    font-weight:800;letter-spacing:.08em;background:var(--gold);color:#3a2c08;
+    padding:5px 15px;border-radius:20px;margin-bottom:14px;position:relative;
+    box-shadow:0 4px 12px rgba(0,0,0,.15)}
+  .coop-page-hero h2{font-family:"Noto Serif Thai",serif;font-size:clamp(1.5rem,3.2vw,2.2rem);
+    font-weight:700;color:#fff;margin-bottom:8px;position:relative;text-shadow:0 2px 8px rgba(0,0,0,.18)}
+  .coop-page-hero p{font-size:.92rem;opacity:.95;line-height:1.65;max-width:64ch;position:relative}
+  .coop-stat-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;position:relative}
+  .coop-stat-pill{background:rgba(255,255,255,.2);border:1.5px solid rgba(255,255,255,.4);
+    border-radius:22px;padding:8px 17px;font-size:.85rem;font-weight:800;
+    backdrop-filter:blur(4px);display:flex;align-items:center;gap:7px;transition:.2s}
+  .coop-stat-pill:hover{background:rgba(255,255,255,.32);transform:translateY(-2px)}
+  .coop-stat-pill span{font-size:1.15rem}
+
+  /* ---------- QUICK NAV (sticky) ---------- */
+  .coop-nav{position:sticky;top:var(--coop-nav-top,112px);z-index:15;margin:0 -20px 22px;padding:10px 20px;
+    background:rgba(247,244,237,.95);backdrop-filter:blur(10px);
+    border-bottom:2px solid var(--line);border-top:1px solid var(--line);
+    overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .coop-nav::-webkit-scrollbar{display:none}
+  .coop-nav-inner{display:flex;gap:8px;min-width:max-content}
+  .coop-nav a{flex:none;font-size:.8rem;font-weight:700;color:var(--slate);
+    background:#fff;border:1.5px solid var(--line);border-radius:20px;padding:7px 14px;
+    text-decoration:none;transition:.18s;white-space:nowrap;display:flex;align-items:center;gap:5px}
+  .coop-nav a:hover{border-color:var(--co-mint);color:var(--co-mint);transform:translateY(-1px)}
+  .coop-nav a.active{background:var(--sea);border-color:var(--sea);color:#fff;
+    box-shadow:0 4px 12px rgba(31,107,99,.3)}
+
+  /* ---------- SECTION HEADER ---------- */
+  .coop-sec{scroll-margin-top:170px}
+  .coop-sec-head{display:flex;align-items:center;gap:13px;margin:30px 0 16px;
+    padding-bottom:13px;border-bottom:2px solid var(--line);position:relative}
+  .coop-sec-head::after{content:"";position:absolute;left:0;bottom:-2px;width:90px;height:3px;
+    border-radius:3px;background:linear-gradient(90deg,var(--co-pink),var(--co-sun))}
+  .coop-sec-head .csh-ico{font-size:1.7rem;line-height:1;
+    filter:drop-shadow(0 2px 4px rgba(0,0,0,.12))}
+  .coop-sec-head h3{font-family:"Noto Serif Thai",serif;font-size:1.28rem;font-weight:700;color:var(--navy)}
+  .coop-sec-head .csh-sub{font-size:.8rem;color:#fff;font-weight:800;margin-left:auto;
+    background:linear-gradient(135deg,var(--co-pink),#c0286b);border-radius:20px;padding:4px 14px;
+    box-shadow:0 3px 10px rgba(224,69,127,.3)}
+
+  /* ---------- INTL BANNER ---------- */
+  .coop-intl-banner{background:linear-gradient(135deg,var(--co-grape),#4a2f7a);color:#fff;
+    border-radius:14px;padding:14px 20px;margin-bottom:18px;font-size:.88rem;line-height:1.6;
+    display:none;position:relative;box-shadow:0 8px 24px rgba(125,91,190,.3)}
   .coop-intl-banner.show-intl{display:block}
   .coop-intl-banner b{color:var(--gold-bright)}
 
-  .coop-sec-head{display:flex;align-items:center;gap:12px;margin:28px 0 14px;
-    padding-bottom:12px;border-bottom:2px solid var(--line);position:relative}
-  .coop-sec-head::after{content:"";position:absolute;left:0;bottom:-2px;width:80px;height:2px;
-    background:linear-gradient(90deg,var(--sea),transparent)}
-  .coop-sec-head .csh-ico{font-size:1.5rem;line-height:1}
-  .coop-sec-head h3{font-family:"Noto Serif Thai",serif;font-size:1.2rem;font-weight:700;color:var(--navy)}
-  .coop-sec-head .csh-sub{font-size:.8rem;color:var(--sea);background:var(--sea-soft);
-    border-radius:20px;padding:3px 12px;font-weight:700;margin-left:auto}
-
+  /* ---------- VS TABLE ---------- */
   .vs-table{display:grid;grid-template-columns:1fr auto 1fr;
-    background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;
-    box-shadow:0 2px 12px rgba(22,35,63,.06);margin-bottom:8px}
-  .vs-col-head{padding:14px 18px;font-family:"Noto Serif Thai",serif;font-size:1rem;
+    background:#fff;border:2px solid var(--line);border-radius:18px;overflow:hidden;
+    box-shadow:0 6px 20px rgba(22,35,63,.08);margin-bottom:10px}
+  .vs-col-head{padding:16px 18px;font-family:"Noto Serif Thai",serif;font-size:1.05rem;
     font-weight:700;text-align:center}
-  .vs-col-head.intern{background:var(--paper2);color:var(--slate)}
-  .vs-col-head.coop-h{background:linear-gradient(135deg,var(--sea),#0f4a44);color:#fff}
-  .vs-divider{display:flex;align-items:center;justify-content:center;background:var(--navy);
-    color:#fff;font-weight:800;font-size:.9rem;padding:0 14px;writing-mode:vertical-rl}
-  .vs-cell{padding:9px 18px;font-size:.84rem;border-top:1px solid var(--line);
+  .vs-col-head.intern{background:linear-gradient(135deg,#8a93a6,#6b7488);color:#fff}
+  .vs-col-head.coop-h{background:linear-gradient(135deg,var(--co-mint),#1f8f76);color:#fff}
+  .vs-divider{display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(180deg,var(--co-pink),#c0286b);
+    color:#fff;font-weight:800;font-size:.95rem;padding:0 15px;writing-mode:vertical-rl}
+  .vs-cell{padding:10px 18px;font-size:.85rem;border-top:1px solid var(--line);
     display:flex;align-items:center;gap:8px;line-height:1.5}
   .vs-cell.intern{background:#fafafa;color:var(--slate)}
-  .vs-cell.coop-c{background:linear-gradient(90deg,rgba(31,107,99,.05),transparent);color:var(--ink)}
-  .vs-cell b{color:var(--sea)}
-  .vs-div-cell{background:var(--navy);display:flex;align-items:center;justify-content:center;
-    border-top:1px solid rgba(255,255,255,.15);padding:6px 0}
-  .vs-div-cell span{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.35)}
+  .vs-cell.coop-c{background:linear-gradient(90deg,rgba(47,184,154,.08),transparent);color:var(--ink)}
+  .vs-cell b{color:var(--co-mint)}
+  .vs-div-cell{background:linear-gradient(180deg,#f4d3e1,#f0c1d5);display:flex;align-items:center;
+    justify-content:center;border-top:1px solid rgba(255,255,255,.4);padding:7px 0}
+  .vs-div-cell span{width:6px;height:6px;border-radius:50%;background:var(--co-pink);opacity:.5}
   @media(max-width:640px){
     .vs-table{grid-template-columns:1fr}
-    .vs-divider{writing-mode:horizontal-tb;padding:10px;font-size:1.1rem}
+    .vs-divider{writing-mode:horizontal-tb;padding:10px;font-size:1.15rem}
   }
 
-  .coop-req-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-bottom:8px}
-  .coop-req-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;
-    border-left:4px solid var(--sea);box-shadow:0 1px 4px rgba(22,35,63,.05)}
-  .coop-req-card h4{font-family:"Noto Serif Thai",serif;font-size:.95rem;font-weight:700;
-    color:var(--navy);margin-bottom:8px;display:flex;align-items:center;gap:7px}
+  /* ---------- REQ CARDS ---------- */
+  .coop-req-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:13px;margin-bottom:10px}
+  .coop-req-card{background:#fff;border:2px solid var(--line);border-radius:16px;padding:18px 19px;
+    box-shadow:0 3px 12px rgba(22,35,63,.06);transition:.2s;position:relative;overflow:hidden}
+  .coop-req-card::before{content:"";position:absolute;top:0;left:0;width:100%;height:5px}
+  .coop-req-card:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(22,35,63,.12)}
+  .coop-req-card.rq-mint::before{background:var(--co-mint)}
+  .coop-req-card.rq-sun::before{background:var(--co-sun)}
+  .coop-req-card.rq-grape::before{background:var(--co-grape)}
+  .coop-req-card h4{font-family:"Noto Serif Thai",serif;font-size:1rem;font-weight:700;
+    color:var(--navy);margin-bottom:10px;display:flex;align-items:center;gap:8px}
   .coop-req-card ul{padding-left:0;list-style:none}
-  .coop-req-card ul li{font-size:.84rem;color:var(--ink);padding:4px 0;
-    display:flex;align-items:flex-start;gap:7px;border-bottom:1px solid var(--line);line-height:1.5}
+  .coop-req-card ul li{font-size:.85rem;color:var(--ink);padding:5px 0;
+    display:flex;align-items:flex-start;gap:8px;border-bottom:1px solid var(--line);line-height:1.55}
   .coop-req-card ul li:last-child{border-bottom:none}
-  .coop-req-card ul li::before{content:"✓";color:var(--sea);font-weight:800;flex:none;margin-top:1px}
-  .coop-req-warn{background:var(--clay-soft);border:1px solid #e8c5b8;border-left:4px solid var(--clay);
-    border-radius:12px;padding:12px 15px;font-size:.84rem;color:#6b2d1a;margin-top:4px;line-height:1.6}
-  .coop-req-warn b{color:var(--clay)}
+  .coop-req-card ul li::before{content:"✓";font-weight:800;flex:none;margin-top:1px}
+  .coop-req-card.rq-mint ul li::before{color:var(--co-mint)}
+  .coop-req-card.rq-sun ul li::before{color:var(--co-sun)}
+  .coop-req-card.rq-grape ul li::before{color:var(--co-grape)}
+  .coop-req-warn{background:linear-gradient(135deg,var(--co-pink-soft),#fff);border:2px solid #f4c5d8;
+    border-left:5px solid var(--co-pink);border-radius:14px;padding:14px 17px;font-size:.86rem;
+    color:#8a1f4a;margin-top:6px;line-height:1.6}
+  .coop-req-warn b{color:var(--co-pink)}
 
-  .steps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:10px;margin-bottom:8px}
-  .step-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;
-    transition:.2s;box-shadow:0 1px 4px rgba(22,35,63,.04)}
-  .step-card:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(22,35,63,.1)}
-  .step-card .sc-num{font-family:"Cormorant",Georgia,serif;font-size:2rem;font-weight:700;
-    line-height:.9;color:var(--gold);margin-bottom:6px}
-  .step-card .sc-title{font-weight:700;font-size:.88rem;color:var(--navy);margin-bottom:4px}
-  .step-card .sc-desc{font-size:.78rem;color:var(--slate);line-height:1.5}
-  .step-card.step-key{border-left:4px solid var(--sea);background:linear-gradient(135deg,rgba(31,107,99,.04),#fff)}
-  .step-card.step-key .sc-num{color:var(--sea)}
-  .step-card.step-final{border:2px solid var(--sea);background:linear-gradient(135deg,var(--sea-soft),#fff)}
-  .step-card.step-final .sc-title{color:var(--sea)}
-  .step-card.step-final .sc-num{color:var(--sea)}
-  @media(max-width:640px){.steps-grid{grid-template-columns:1fr 1fr}}
+  /* ---------- PREP CARDS ---------- */
+  .prep-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:11px;margin-bottom:10px}
+  .prep-card{background:#fff;border:2px solid var(--line);border-radius:14px;padding:16px 14px;
+    text-align:center;box-shadow:0 2px 8px rgba(22,35,63,.05);transition:.2s}
+  .prep-card:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 10px 22px rgba(22,35,63,.12)}
+  .prep-card .pc-ico{font-size:2.1rem;margin-bottom:9px;display:inline-block;
+    filter:drop-shadow(0 3px 6px rgba(0,0,0,.12))}
+  .prep-card .pc-title{font-weight:800;font-size:.86rem;color:var(--navy);margin-bottom:4px}
+  .prep-card .pc-desc{font-size:.75rem;color:var(--slate);line-height:1.45}
 
-  .coop-timeline{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:8px}
-  .tl-card{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;
-    box-shadow:0 2px 8px rgba(22,35,63,.06)}
-  .tl-head{padding:12px 16px;font-family:"Noto Serif Thai",serif;font-weight:700;font-size:.95rem;
+  /* ---------- VERTICAL TIMELINE (พระเอก) ---------- */
+  .coop-tl{position:relative;margin:8px 0 10px;padding:6px 0}
+  .coop-tl::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:4px;
+    transform:translateX(-50%);border-radius:4px;
+    background:linear-gradient(180deg,var(--co-mint),var(--co-sun),var(--co-pink))}
+  .tl-step{position:relative;width:50%;padding:0 38px 26px 0;box-sizing:border-box}
+  .tl-step:nth-child(even){margin-left:50%;padding:0 0 26px 38px}
+  .tl-step .tls-dot{position:absolute;top:6px;width:46px;height:46px;border-radius:50%;
+    background:#fff;border:4px solid var(--co-mint);display:flex;align-items:center;justify-content:center;
+    font-family:"Cormorant",Georgia,serif;font-size:1.5rem;font-weight:700;color:var(--co-mint);
+    z-index:2;box-shadow:0 4px 14px rgba(0,0,0,.12)}
+  .tl-step:nth-child(odd) .tls-dot{right:-23px}
+  .tl-step:nth-child(even) .tls-dot{left:-23px}
+  .tl-card2{background:#fff;border:2px solid var(--line);border-radius:16px;padding:15px 17px;
+    box-shadow:0 4px 14px rgba(22,35,63,.07);transition:.2s;position:relative}
+  .tl-card2:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(22,35,63,.13)}
+  .tl-card2 .tlc-ico{font-size:1.4rem;margin-bottom:5px;display:block}
+  .tl-card2 .tlc-title{font-weight:800;font-size:.92rem;color:var(--navy);margin-bottom:4px}
+  .tl-card2 .tlc-desc{font-size:.8rem;color:var(--slate);line-height:1.5}
+  .tl-card2 .tlc-badge{display:inline-block;font-size:.68rem;font-weight:800;
+    border-radius:12px;padding:2px 10px;margin-bottom:7px}
+  /* key step */
+  .tl-step.key .tls-dot{border-color:var(--co-sun);color:var(--co-sun)}
+  .tl-step.key .tl-card2{border-color:var(--co-sun-soft);
+    background:linear-gradient(135deg,var(--co-sun-soft),#fff)}
+  .tl-step.key .tlc-badge{background:var(--co-sun-soft);color:#9a6512}
+  /* final step */
+  .tl-step.final .tls-dot{border-color:var(--co-pink);color:var(--co-pink);
+    background:var(--co-pink);color:#fff;transform:scale(1.12)}
+  .tl-step.final .tl-card2{border:3px solid var(--co-pink);
+    background:linear-gradient(135deg,var(--co-pink-soft),#fff)}
+  .tl-step.final .tlc-title{color:var(--co-pink)}
+  .tl-step.final .tlc-badge{background:var(--co-pink);color:#fff}
+  /* mobile: เส้นชิดซ้าย */
+  @media(max-width:680px){
+    .coop-tl::before{left:23px}
+    .tl-step,.tl-step:nth-child(even){width:100%;margin-left:0;padding:0 0 22px 60px}
+    .tl-step:nth-child(odd) .tls-dot,.tl-step:nth-child(even) .tls-dot{left:0;right:auto}
+  }
+
+  /* ---------- TIMELINE รับสมัคร ---------- */
+  .coop-timeline{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:10px}
+  .tl-card{background:#fff;border:2px solid var(--line);border-radius:16px;overflow:hidden;
+    box-shadow:0 4px 14px rgba(22,35,63,.07);transition:.2s}
+  .tl-card:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(22,35,63,.12)}
+  .tl-head{padding:14px 17px;font-family:"Noto Serif Thai",serif;font-weight:700;font-size:1rem;
     color:#fff;display:flex;align-items:center;gap:8px}
-  .tl-head.sem1{background:linear-gradient(135deg,var(--sea),#0f4a44)}
-  .tl-head.sem2{background:linear-gradient(135deg,var(--plum),#3a2558)}
-  .tl-body{padding:14px 16px}
-  .tl-row{display:flex;gap:10px;padding:7px 0;border-bottom:1px solid var(--line);font-size:.83rem}
+  .tl-head.sem1{background:linear-gradient(135deg,var(--co-mint),#1f8f76)}
+  .tl-head.sem2{background:linear-gradient(135deg,var(--co-grape),#4a2f7a)}
+  .tl-body{padding:15px 17px}
+  .tl-row{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:.84rem}
   .tl-row:last-child{border-bottom:none;padding-bottom:0}
-  .tl-label{font-weight:700;color:var(--slate);min-width:88px;flex:none}
+  .tl-label{font-weight:800;color:var(--slate);min-width:90px;flex:none}
   .tl-val{color:var(--ink);line-height:1.5}
   @media(max-width:640px){.coop-timeline{grid-template-columns:1fr}}
 
-  .rules-list{display:flex;flex-direction:column;gap:8px;margin-bottom:8px}
-  .rule-item{display:flex;gap:12px;background:#fff;border:1px solid var(--line);
-    border-radius:12px;padding:13px 16px;align-items:flex-start;
-    box-shadow:0 1px 3px rgba(22,35,63,.04);transition:.18s}
-  .rule-item:hover{box-shadow:0 4px 14px rgba(22,35,63,.08)}
-  .rule-item.rule-warn{border-left:4px solid var(--clay);background:linear-gradient(90deg,rgba(168,71,42,.03),#fff)}
-  .rule-item.rule-ok{border-left:4px solid var(--ok);background:linear-gradient(90deg,rgba(47,125,79,.03),#fff)}
-  .rule-item.rule-info{border-left:4px solid var(--gold);background:linear-gradient(90deg,rgba(176,136,51,.04),#fff)}
-  .rule-ico{font-size:1.3rem;flex:none;margin-top:1px}
-  .rule-body .rule-title{font-weight:700;font-size:.9rem;color:var(--navy);margin-bottom:3px}
-  .rule-body .rule-desc{font-size:.82rem;color:var(--slate);line-height:1.6}
+  /* ---------- รีวิวรุ่นพี่ ---------- */
+  .review-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:14px;margin-bottom:10px}
+  .review-card{background:#fff;border:2px solid var(--line);border-radius:16px;padding:0;
+    overflow:hidden;box-shadow:0 4px 14px rgba(22,35,63,.07);transition:.2s;
+    display:flex;flex-direction:column}
+  .review-card:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(22,35,63,.14)}
+  .rv-top{padding:14px 16px 12px;color:#fff;position:relative}
+  .rv-top .rv-org{font-family:"Noto Serif Thai",serif;font-weight:700;font-size:1.02rem;margin-bottom:2px}
+  .rv-top .rv-role{font-size:.76rem;opacity:.92;font-weight:600}
+  .rv-top .rv-quote{position:absolute;top:8px;right:14px;font-size:2.4rem;opacity:.25;
+    font-family:Georgia,serif;line-height:1}
+  .rv-body{padding:13px 16px 15px;font-size:.83rem;color:var(--ink);line-height:1.6;flex:1}
+  .rv-tag{display:inline-block;font-size:.68rem;font-weight:800;border-radius:12px;
+    padding:2px 10px;margin-top:10px}
+
+  /* ---------- RULES ---------- */
+  .rules-list{display:flex;flex-direction:column;gap:9px;margin-bottom:10px}
+  .rule-item{display:flex;gap:13px;background:#fff;border:2px solid var(--line);
+    border-radius:14px;padding:14px 17px;align-items:flex-start;
+    box-shadow:0 2px 8px rgba(22,35,63,.05);transition:.18s}
+  .rule-item:hover{transform:translateX(3px);box-shadow:0 6px 18px rgba(22,35,63,.1)}
+  .rule-item.rule-warn{border-left:5px solid var(--co-pink);background:linear-gradient(90deg,var(--co-pink-soft),#fff)}
+  .rule-item.rule-ok{border-left:5px solid var(--co-mint);background:linear-gradient(90deg,var(--co-mint-soft),#fff)}
+  .rule-item.rule-info{border-left:5px solid var(--co-sun);background:linear-gradient(90deg,var(--co-sun-soft),#fff)}
+  .rule-ico{font-size:1.5rem;flex:none;margin-top:1px}
+  .rule-body .rule-title{font-weight:800;font-size:.92rem;color:var(--navy);margin-bottom:3px}
+  .rule-body .rule-desc{font-size:.83rem;color:var(--slate);line-height:1.6}
   .rule-body .rule-desc b{color:var(--ink)}
 
-  .prep-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px;margin-bottom:8px}
-  .prep-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 15px;
-    text-align:center;box-shadow:0 1px 3px rgba(22,35,63,.04);transition:.18s}
-  .prep-card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(22,35,63,.09)}
-  .prep-card .pc-ico{font-size:1.8rem;margin-bottom:7px}
-  .prep-card .pc-title{font-weight:700;font-size:.85rem;color:var(--navy);margin-bottom:3px}
-  .prep-card .pc-desc{font-size:.74rem;color:var(--slate);line-height:1.4}
+  /* ---------- FAQ ---------- */
+  .faq-list{display:flex;flex-direction:column;gap:10px;margin-bottom:10px}
+  .faq-item{background:#fff;border:2px solid var(--line);border-radius:14px;overflow:hidden;
+    transition:.2s}
+  .faq-item.open{border-color:var(--co-mint);box-shadow:0 6px 18px rgba(47,184,154,.15)}
+  .faq-q{padding:15px 18px;font-weight:800;font-size:.9rem;color:var(--navy);cursor:pointer;
+    display:flex;align-items:center;gap:10px;user-select:none;transition:.15s}
+  .faq-q:hover{background:var(--co-mint-soft)}
+  .faq-q .faq-ico{font-size:1.2rem;flex:none}
+  .faq-q .faq-caret{margin-left:auto;transition:transform .25s;color:var(--co-mint);font-size:1.1rem}
+  .faq-item.open .faq-caret{transform:rotate(180deg)}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease;
+    padding:0 18px;font-size:.85rem;color:var(--slate);line-height:1.65}
+  .faq-item.open .faq-a{max-height:340px;padding:0 18px 16px}
+  .faq-a b{color:var(--ink)}
 
-  .coop-link-box{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;
-    border-radius:14px;padding:18px 20px;display:flex;align-items:center;gap:18px;
-    margin-top:16px;box-shadow:0 6px 20px rgba(22,35,63,.2)}
-  .coop-link-box .clb-text h4{font-family:"Noto Serif Thai",serif;font-size:1rem;font-weight:700;margin-bottom:4px}
-  .coop-link-box .clb-text p{font-size:.82rem;opacity:.8;margin-bottom:8px}
+  /* ---------- LINK BOX ---------- */
+  .coop-link-box{background:
+      radial-gradient(circle at 90% 20%,rgba(242,169,59,.4),transparent 50%),
+      linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;
+    border-radius:16px;padding:20px 22px;display:flex;align-items:center;gap:18px;
+    margin-top:16px;box-shadow:0 8px 24px rgba(22,35,63,.22);position:relative;overflow:hidden}
+  .coop-link-box .clb-text h4{font-family:"Noto Serif Thai",serif;font-size:1.05rem;font-weight:700;margin-bottom:4px}
+  .coop-link-box .clb-text p{font-size:.83rem;opacity:.82;margin-bottom:10px}
   .coop-link-box a{display:inline-flex;align-items:center;gap:6px;background:var(--gold);
-    color:#3a2c08;font-weight:800;font-size:.85rem;padding:7px 16px;border-radius:20px;
+    color:#3a2c08;font-weight:800;font-size:.86rem;padding:8px 18px;border-radius:22px;
     text-decoration:none;transition:.18s}
-  .coop-link-box a:hover{background:var(--gold-bright);transform:translateY(-1px)}
-  .clb-icon{font-size:2.2rem;flex:none}
+  .coop-link-box a:hover{background:var(--gold-bright);transform:translateY(-2px) scale(1.03)}
+  .clb-icon{font-size:2.4rem;flex:none}
+
 
   /* ===== PROGRAM SWITCHER (สลับหลักสูตร) ===== */
   /* wrapper สำหรับ scroll บนมือถือ */
@@ -3220,270 +3334,262 @@
     </div>
   </section>
 
-  <!-- ===== COOP SECTION ===== -->
-  <section class="year" data-year="coop">
+  <!-- ===== COOP SECTION (v2 สดใส) ===== -->
+  <section class="year coop-wrap" data-year="coop">
 
-    <!-- Hero Banner -->
+    <!-- Hero -->
     <div class="coop-page-hero reveal">
+      <span class="ch-emoji ce1">🎉</span>
+      <span class="ch-emoji ce2">✨</span>
+      <span class="ch-emoji ce3">🚀</span>
       <span class="ch-eyebrow">🌟 หลักสูตรสหกิจศึกษา · 751449</span>
-      <h2>สหกิจศึกษา (Cooperative Education)</h2>
-      <p>ประสบการณ์การเรียนรู้แบบบูรณาการที่ผสมผสานทฤษฎีและปฏิบัติ — ออกไปทำงานจริงในสถานประกอบการเต็มเวลา 1 ภาคการศึกษา เสมือนเป็น "พนักงานชั่วคราว" นำความรู้จากห้องเรียนมาใช้จริง สร้าง Connection และเพิ่มโอกาสได้งานก่อนจบ ✨</p>
+      <h2>สหกิจศึกษา · ออกไปทำงานจริง 1 เทอม!</h2>
+      <p>ประสบการณ์เรียนรู้แบบบูรณาการที่ผสมทฤษฎี + ปฏิบัติ — ออกไปทำงานเต็มเวลาในสถานประกอบการเสมือน "พนักงานชั่วคราว" ได้ลองของจริง สร้าง Connection และเพิ่มโอกาสได้งานก่อนเพื่อน 🎯</p>
       <div class="coop-stat-row">
         <div class="coop-stat-pill"><span>⏱️</span> 16 สัปดาห์ (4 เดือน)</div>
         <div class="coop-stat-pill"><span>📚</span> 6 หน่วยกิต</div>
-        <div class="coop-stat-pill"><span>🎓</span> เกรด S หรือ U</div>
+        <div class="coop-stat-pill"><span>🎓</span> เกรด S / U</div>
         <div class="coop-stat-pill"><span>👨‍🏫</span> มีอาจารย์นิเทศ</div>
-        <div class="coop-stat-pill"><span>📋</span> ทำรายงาน / Project</div>
+        <div class="coop-stat-pill"><span>💼</span> โอกาสได้ Job Offer</div>
       </div>
     </div>
 
-    <!-- Banner พิเศษ Int-B -->
+    <!-- Quick Nav -->
+    <nav class="coop-nav" id="coopNav">
+      <div class="coop-nav-inner">
+        <a href="#co-vs" class="active">⚖️ เทียบฝึกงาน</a>
+        <a href="#co-req">📋 คุณสมบัติ</a>
+        <a href="#co-prep">🛠️ อบรม</a>
+        <a href="#co-steps">🛤️ 10 ขั้นตอน</a>
+        <a href="#co-when">📅 ช่วงเวลา</a>
+        <a href="#co-review">💬 รีวิวรุ่นพี่</a>
+        <a href="#co-rules">⚖️ กฎสำคัญ</a>
+        <a href="#co-faq">❓ FAQ</a>
+      </div>
+    </nav>
+
+    <!-- Banner Int-B -->
     <div class="coop-intl-banner reveal" id="coopIntlBanner">
-      🌏 <b>หลักสูตรนานาชาติ Int-B:</b> สหกิจศึกษาของหลักสูตรนี้เปิดโอกาสพิเศษให้ฝึกงานกับ <b>องค์กรระหว่างประเทศหรือบริษัทข้ามชาติ</b> ได้ด้วย — เป็นข้อได้เปรียบสำคัญสำหรับผู้ที่ต้องการสมัครงาน IMF / ADB / World Bank หรือบริษัทต่างชาติ
+      🌏 <b>หลักสูตรนานาชาติ Int-B:</b> สหกิจของหลักสูตรนี้เปิดโอกาสฝึกงานกับ <b>องค์กรระหว่างประเทศหรือบริษัทข้ามชาติ</b> ได้ด้วย — ข้อได้เปรียบสำคัญสำหรับผู้ที่อยากสมัคร IMF / ADB / World Bank หรือบริษัทต่างชาติ
     </div>
 
-    <!-- 1. สหกิจ vs ฝึกงาน -->
-    <div class="coop-sec-head reveal">
-      <span class="csh-ico">⚖️</span>
-      <h3>สหกิจศึกษา VS ฝึกงานทั่วไป</h3>
-      <span class="csh-sub">ต่างกันยังไง?</span>
-    </div>
-    <div class="vs-table reveal">
-      <div class="vs-col-head intern">🎒 ฝึกงาน<br><small style="font-weight:400;font-size:.75rem">Internship</small></div>
-      <div class="vs-divider">VS</div>
-      <div class="vs-col-head coop-h">🌟 สหกิจศึกษา<br><small style="font-weight:400;font-size:.75rem;opacity:.88">Cooperative Education</small></div>
-      <div class="vs-cell intern">👤 นักศึกษาฝึกงาน</div>
-      <div class="vs-div-cell"><span></span></div>
-      <div class="vs-cell coop-c">💼 <b>เสมือนพนักงานชั่วคราว</b></div>
-      <div class="vs-cell intern">📅 1–2 เดือน</div>
-      <div class="vs-div-cell"><span></span></div>
-      <div class="vs-cell coop-c">📅 <b>16 สัปดาห์ (4 เดือน)</b></div>
-      <div class="vs-cell intern">☀️ ระหว่างภาคฤดูร้อน</div>
-      <div class="vs-div-cell"><span></span></div>
-      <div class="vs-cell coop-c">📆 <b>ระหว่างภาคเรียนปกติ</b></div>
-      <div class="vs-cell intern">❌ ไม่ต้องลงทะเบียนวิชา</div>
-      <div class="vs-div-cell"><span></span></div>
-      <div class="vs-cell coop-c">✅ <b>ลงทะเบียน 751449 (6 นก.)</b></div>
-      <div class="vs-cell intern">❌ ไม่มีเกรด</div>
-      <div class="vs-div-cell"><span></span></div>
-      <div class="vs-cell coop-c">✅ <b>เกรด "S" หรือ "U"</b></div>
-      <div class="vs-cell intern">❌ ไม่มีอาจารย์ที่ปรึกษา</div>
-      <div class="vs-div-cell"><span></span></div>
-      <div class="vs-cell coop-c">✅ <b>มีอาจารย์นิเทศ + เยี่ยม 1–2 ครั้ง</b></div>
-      <div class="vs-cell intern">❌ ไม่มีการนิเทศงาน</div>
-      <div class="vs-div-cell"><span></span></div>
-      <div class="vs-cell coop-c">✅ <b>ทำรายงาน / โครงงาน / Project</b></div>
-    </div>
-    <div class="note reveal" style="margin-top:10px;margin-bottom:4px">
-      🎁 <b>สิ่งที่ได้รับจากสหกิจ:</b> นำวิชาความรู้มาประยุกต์ใช้จริง · กระบวนการทำงานอย่างเป็นระบบ · ทักษะการสื่อสาร-รายงาน · ทักษะมนุษยสัมพันธ์ · สวัสดิการ/ค่าตอบแทน (บางแห่ง) · <b>มีโอกาสได้รับ Job Offer ก่อนจบการศึกษา</b>
+    <!-- 1. VS -->
+    <div class="coop-sec" id="co-vs">
+      <div class="coop-sec-head reveal">
+        <span class="csh-ico">⚖️</span>
+        <h3>สหกิจศึกษา VS ฝึกงานทั่วไป</h3>
+        <span class="csh-sub">ต่างกันยังไง?</span>
+      </div>
+      <div class="vs-table reveal">
+        <div class="vs-col-head intern">🎒 ฝึกงาน<br><small style="font-weight:400;font-size:.75rem">Internship</small></div>
+        <div class="vs-divider">VS</div>
+        <div class="vs-col-head coop-h">🌟 สหกิจศึกษา<br><small style="font-weight:400;font-size:.75rem;opacity:.9">Cooperative Education</small></div>
+        <div class="vs-cell intern">👤 นักศึกษาฝึกงาน</div>
+        <div class="vs-div-cell"><span></span></div>
+        <div class="vs-cell coop-c">💼 <b>เสมือนพนักงานชั่วคราว</b></div>
+        <div class="vs-cell intern">📅 1–2 เดือน</div>
+        <div class="vs-div-cell"><span></span></div>
+        <div class="vs-cell coop-c">📅 <b>16 สัปดาห์ (4 เดือน)</b></div>
+        <div class="vs-cell intern">☀️ ระหว่างภาคฤดูร้อน</div>
+        <div class="vs-div-cell"><span></span></div>
+        <div class="vs-cell coop-c">📆 <b>ระหว่างภาคเรียนปกติ</b></div>
+        <div class="vs-cell intern">❌ ไม่ต้องลงทะเบียนวิชา</div>
+        <div class="vs-div-cell"><span></span></div>
+        <div class="vs-cell coop-c">✅ <b>ลงทะเบียน 751449 (6 นก.)</b></div>
+        <div class="vs-cell intern">❌ ไม่มีเกรด</div>
+        <div class="vs-div-cell"><span></span></div>
+        <div class="vs-cell coop-c">✅ <b>เกรด "S" หรือ "U"</b></div>
+        <div class="vs-cell intern">❌ ไม่มีอาจารย์ที่ปรึกษา</div>
+        <div class="vs-div-cell"><span></span></div>
+        <div class="vs-cell coop-c">✅ <b>มีอาจารย์นิเทศ + เยี่ยม 1–2 ครั้ง</b></div>
+        <div class="vs-cell intern">❌ ไม่มีการนิเทศงาน</div>
+        <div class="vs-div-cell"><span></span></div>
+        <div class="vs-cell coop-c">✅ <b>ทำรายงาน / โครงงาน / Project</b></div>
+      </div>
+      <div class="note reveal" style="margin-top:10px">
+        🎁 <b>สิ่งที่ได้รับ:</b> นำความรู้มาใช้จริง · ทำงานอย่างเป็นระบบ · ทักษะสื่อสาร-รายงาน · มนุษยสัมพันธ์ · สวัสดิการ/ค่าตอบแทน (บางแห่ง) · <b>โอกาสได้ Job Offer ก่อนจบ!</b>
+      </div>
     </div>
 
     <!-- 2. คุณสมบัติ -->
-    <div class="coop-sec-head reveal">
-      <span class="csh-ico">📋</span>
-      <h3>คุณสมบัติผู้สมัครสหกิจ</h3>
-      <span class="csh-sub">ตรวจสอบก่อนสมัคร!</span>
-    </div>
-    <div class="coop-req-grid reveal">
-      <div class="coop-req-card">
-        <h4>🎓 ระดับชั้นปี</h4>
-        <ul>
-          <li>เป็นนักศึกษาชั้นปีที่ 3 ขึ้นไป</li>
-          <li>ไม่อยู่ระหว่างถูกพักการศึกษา</li>
-          <li>ไม่มีโรคที่เป็นอุปสรรคต่อการปฏิบัติงาน</li>
-        </ul>
+    <div class="coop-sec" id="co-req">
+      <div class="coop-sec-head reveal">
+        <span class="csh-ico">📋</span>
+        <h3>คุณสมบัติผู้สมัครสหกิจ</h3>
+        <span class="csh-sub">เช็กก่อนสมัคร!</span>
       </div>
-      <div class="coop-req-card" style="border-left-color:var(--gold)">
-        <h4>📊 เกณฑ์เกรด (GPA)</h4>
-        <ul>
-          <li><b>รหัส 65…</b> GPA + เกรดวิชาเอก <b>≥ 2.00</b></li>
-          <li><b>รหัส 66… ขึ้นไป</b> GPA + เกรดวิชาเอก <b>≥ 2.25</b></li>
-          <li>GPA ภาคสุดท้ายก่อนสมัคร <b>≥ 2.25</b></li>
-        </ul>
+      <div class="coop-req-grid reveal">
+        <div class="coop-req-card rq-mint">
+          <h4>🎓 ระดับชั้นปี</h4>
+          <ul>
+            <li>เป็นนักศึกษาชั้นปีที่ 3 ขึ้นไป</li>
+            <li>ไม่อยู่ระหว่างถูกพักการศึกษา</li>
+            <li>ไม่มีโรคที่เป็นอุปสรรคต่อการทำงาน</li>
+          </ul>
+        </div>
+        <div class="coop-req-card rq-sun">
+          <h4>📊 เกณฑ์เกรด (GPA)</h4>
+          <ul>
+            <li><b>รหัส 65…</b> GPA + วิชาเอก <b>≥ 2.00</b></li>
+            <li><b>รหัส 66… ขึ้นไป</b> GPA + วิชาเอก <b>≥ 2.25</b></li>
+            <li>GPA ภาคสุดท้ายก่อนสมัคร <b>≥ 2.25</b></li>
+          </ul>
+        </div>
+        <div class="coop-req-card rq-grape">
+          <h4>✅ กิจกรรมที่ต้องผ่าน</h4>
+          <ul>
+            <li>เข้าประชุมชี้แจงวิชา 751449</li>
+            <li>ผ่านสัมภาษณ์ประเมินความพร้อม</li>
+            <li>ผ่านอบรมเตรียมความพร้อม</li>
+            <li>เข้าปฐมนิเทศก่อนออกปฏิบัติ</li>
+          </ul>
+        </div>
       </div>
-      <div class="coop-req-card" style="border-left-color:var(--plum)">
-        <h4>✅ กิจกรรมที่ต้องผ่าน</h4>
-        <ul>
-          <li>เข้าประชุมชี้แจงกระบวนวิชา 751449</li>
-          <li>ผ่านสัมภาษณ์ประเมินความพร้อม</li>
-          <li>ผ่านอบรมเตรียมความพร้อมของคณะ</li>
-          <li>เข้าปฐมนิเทศก่อนออกปฏิบัติ</li>
-        </ul>
-      </div>
-    </div>
-    <div class="coop-req-warn reveal">
-      ⚠️ <b>หมายเหตุสำคัญ:</b> ภาคการศึกษาที่ลงทะเบียน 751449 <b>ไม่สามารถลงวิชาอื่นได้เลย</b> — วางแผนให้เรียบร้อยก่อนถึงภาค Co-op ครับ!
-    </div>
-
-    <!-- หลักสูตรอบรมเตรียมพร้อม -->
-    <div class="coop-sec-head reveal">
-      <span class="csh-ico">🛠️</span>
-      <h3>หลักสูตรอบรมเตรียมความพร้อม</h3>
-      <span class="csh-sub">จัดโดยคณะก่อนออกสหกิจ</span>
-    </div>
-    <div class="prep-grid reveal">
-      <div class="prep-card">
-        <div class="pc-ico">📊</div>
-        <div class="pc-title">MS Excel & Power BI</div>
-        <div class="pc-desc">วิเคราะห์ข้อมูลและสร้าง Dashboard สำหรับใช้งานจริง</div>
-      </div>
-      <div class="prep-card">
-        <div class="pc-ico">🗣️</div>
-        <div class="pc-title">Communicative English At Work</div>
-        <div class="pc-desc">ภาษาอังกฤษสื่อสารในสภาพแวดล้อมการทำงานจริง</div>
-      </div>
-      <div class="prep-card">
-        <div class="pc-ico">✍️</div>
-        <div class="pc-title">การเขียนเพื่อสื่อสาร</div>
-        <div class="pc-desc">เขียนรายงานและสื่อสารให้เกิดประสิทธิภาพสูงสุด</div>
-      </div>
-      <div class="prep-card">
-        <div class="pc-ico">🧠</div>
-        <div class="pc-title">บุคลิกภาพ & Mindset</div>
-        <div class="pc-desc">เตรียมทัศนคติและบุคลิกภาพสำหรับโลกการทำงาน</div>
-      </div>
-      <div class="prep-card">
-        <div class="pc-ico">🎤</div>
-        <div class="pc-title">สัมภาษณ์ประเมินพร้อม</div>
-        <div class="pc-desc">คณะกรรมการสหกิจประเมินก่อนอนุมัติให้ออกปฏิบัติ</div>
+      <div class="coop-req-warn reveal">
+        ⚠️ <b>สำคัญมาก:</b> ภาคที่ลงทะเบียน 751449 <b>ลงวิชาอื่นไม่ได้เลย</b> — ต้องวางแผนเก็บวิชาให้ครบก่อนถึงเทอมสหกิจนะครับ!
       </div>
     </div>
 
-    <!-- 3. 10 Steps -->
-    <div class="coop-sec-head reveal">
-      <span class="csh-ico">🗺️</span>
-      <h3>10 ขั้นตอนตั้งแต่สมัครถึงจบสหกิจ</h3>
-      <span class="csh-sub">ภาพรวมกระบวนการ</span>
-    </div>
-    <div class="steps-grid reveal">
-      <div class="step-card step-key">
-        <div class="sc-num">1</div>
-        <div class="sc-title">ตรวจสอบคุณสมบัติ</div>
-        <div class="sc-desc">เช็ก GPA · ชั้นปี · การลงทะเบียน · ประกาศรับสมัคร</div>
+    <!-- 3. อบรม -->
+    <div class="coop-sec" id="co-prep">
+      <div class="coop-sec-head reveal">
+        <span class="csh-ico">🛠️</span>
+        <h3>หลักสูตรอบรมเตรียมความพร้อม</h3>
+        <span class="csh-sub">คณะจัดให้ฟรี!</span>
       </div>
-      <div class="step-card">
-        <div class="sc-num">2</div>
-        <div class="sc-title">ค้นหาบริษัท/องค์กร</div>
-        <div class="sc-desc">หาสถานที่ที่สนใจและตรงกับสายอาชีพที่ต้องการ</div>
-      </div>
-      <div class="step-card step-key">
-        <div class="sc-num">3</div>
-        <div class="sc-title">ประชุมชี้แจง 751449</div>
-        <div class="sc-desc">เข้าร่วมประชุมกำหนดการกระบวนวิชาสหกิจ (บังคับ!)</div>
-      </div>
-      <div class="step-card">
-        <div class="sc-num">4</div>
-        <div class="sc-title">สัมภาษณ์ประเมินพร้อม</div>
-        <div class="sc-desc">คณะกรรมการสหกิจประเมินความพร้อมก่อนอนุมัติ</div>
-      </div>
-      <div class="step-card step-key">
-        <div class="sc-num">5</div>
-        <div class="sc-title">อบรมเตรียมพร้อม</div>
-        <div class="sc-desc">Excel, Power BI, English, บุคลิกภาพ & Mindset</div>
-      </div>
-      <div class="step-card">
-        <div class="sc-num">6</div>
-        <div class="sc-title">ส่งเอกสารสมัคร</div>
-        <div class="sc-desc">ยื่นใบสมัคร (สก.มช.2) ไปยังสถานประกอบการ</div>
-      </div>
-      <div class="step-card">
-        <div class="sc-num">7</div>
-        <div class="sc-title">ติดตามสถานะ</div>
-        <div class="sc-desc">ตรวจสอบผลการตอบรับจากหน่วยงาน</div>
-      </div>
-      <div class="step-card step-key">
-        <div class="sc-num">8</div>
-        <div class="sc-title">ปฐมนิเทศสหกิจ</div>
-        <div class="sc-desc">เข้าร่วมปฐมนิเทศก่อนออกปฏิบัติงาน (บังคับ!)</div>
-      </div>
-      <div class="step-card step-key">
-        <div class="sc-num">9</div>
-        <div class="sc-title">ลงทะเบียน 751449</div>
-        <div class="sc-desc">ลงทะเบียน + ทำคาดว่าจะสำเร็จการศึกษา (ถ้ามี)</div>
-      </div>
-      <div class="step-card step-final">
-        <div class="sc-num">10</div>
-        <div class="sc-title">🚀 ปฏิบัติสหกิจ!</div>
-        <div class="sc-desc"><b>16 สัปดาห์ · ≥480 ชั่วโมง</b> ต่อเนื่องในสถานประกอบการ</div>
+      <div class="prep-grid reveal">
+        <div class="prep-card"><div class="pc-ico">📊</div><div class="pc-title">Excel & Power BI</div><div class="pc-desc">วิเคราะห์ข้อมูล + สร้าง Dashboard</div></div>
+        <div class="prep-card"><div class="pc-ico">🗣️</div><div class="pc-title">English At Work</div><div class="pc-desc">ภาษาอังกฤษสื่อสารในที่ทำงาน</div></div>
+        <div class="prep-card"><div class="pc-ico">✍️</div><div class="pc-title">การเขียนสื่อสาร</div><div class="pc-desc">เขียนรายงานให้มีประสิทธิภาพ</div></div>
+        <div class="prep-card"><div class="pc-ico">🧠</div><div class="pc-title">บุคลิกภาพ & Mindset</div><div class="pc-desc">เตรียมทัศนคติพร้อมทำงาน</div></div>
+        <div class="prep-card"><div class="pc-ico">🎤</div><div class="pc-title">สัมภาษณ์ประเมิน</div><div class="pc-desc">คณะกรรมการประเมินก่อนอนุมัติ</div></div>
       </div>
     </div>
 
-    <!-- 4. Timeline -->
-    <div class="coop-sec-head reveal">
-      <span class="csh-ico">📅</span>
-      <h3>ช่วงเวลารับสมัครและปฏิบัติสหกิจ</h3>
-      <span class="csh-sub">เริ่มเมื่อไหร่?</span>
-    </div>
-    <div class="coop-timeline reveal">
-      <div class="tl-card">
-        <div class="tl-head sem1">📘 ภาคการศึกษาที่ 1</div>
-        <div class="tl-body">
-          <div class="tl-row"><span class="tl-label">📢 รับสมัคร</span><span class="tl-val"><b>ตุลาคม – พฤศจิกายน</b> (ปีก่อน)</span></div>
-          <div class="tl-row"><span class="tl-label">💼 ปฏิบัติสหกิจ</span><span class="tl-val"><b>มิถุนายน – ตุลาคม</b></span></div>
-          <div class="tl-row"><span class="tl-label">💡 เหมาะกับ</span><span class="tl-val">น้องที่อยากไปช่วงต้นปีการศึกษา</span></div>
-        </div>
+    <!-- 4. 10 STEPS Vertical Timeline -->
+    <div class="coop-sec" id="co-steps">
+      <div class="coop-sec-head reveal">
+        <span class="csh-ico">🛤️</span>
+        <h3>10 ขั้นตอน · จากสมัครถึงจบสหกิจ</h3>
+        <span class="csh-sub">เส้นทางของน้อง</span>
       </div>
-      <div class="tl-card">
-        <div class="tl-head sem2">📙 ภาคการศึกษาที่ 2</div>
-        <div class="tl-body">
-          <div class="tl-row"><span class="tl-label">📢 รับสมัคร</span><span class="tl-val"><b>พฤษภาคม – มิถุนายน</b></span></div>
-          <div class="tl-row"><span class="tl-label">💼 ปฏิบัติสหกิจ</span><span class="tl-val"><b>พฤศจิกายน – มีนาคม</b></span></div>
-          <div class="tl-row"><span class="tl-label">💡 เหมาะกับ</span><span class="tl-val">น้องที่อยากไปช่วงต้นปีใหม่</span></div>
-        </div>
+      <div class="coop-tl">
+        <div class="tl-step key reveal"><div class="tls-dot">1</div><div class="tl-card2"><span class="tlc-badge">เริ่มที่นี่</span><span class="tlc-ico">🔍</span><div class="tlc-title">ตรวจสอบคุณสมบัติ</div><div class="tlc-desc">เช็ก GPA · ชั้นปี · การลงทะเบียน · รอประกาศรับสมัคร</div></div></div>
+        <div class="tl-step reveal"><div class="tls-dot">2</div><div class="tl-card2"><span class="tlc-ico">🏢</span><div class="tlc-title">ค้นหาบริษัท/องค์กร</div><div class="tlc-desc">หาที่ที่สนใจและตรงกับสายอาชีพที่อยากไป</div></div></div>
+        <div class="tl-step key reveal"><div class="tls-dot">3</div><div class="tl-card2"><span class="tlc-badge">บังคับ</span><span class="tlc-ico">📢</span><div class="tlc-title">ประชุมชี้แจง 751449</div><div class="tlc-desc">เข้าร่วมประชุมกำหนดการกระบวนวิชาสหกิจ</div></div></div>
+        <div class="tl-step reveal"><div class="tls-dot">4</div><div class="tl-card2"><span class="tlc-ico">🎤</span><div class="tlc-title">สัมภาษณ์ประเมินพร้อม</div><div class="tlc-desc">คณะกรรมการสหกิจประเมินความพร้อมก่อนอนุมัติ</div></div></div>
+        <div class="tl-step key reveal"><div class="tls-dot">5</div><div class="tl-card2"><span class="tlc-badge">เก็บสกิล</span><span class="tlc-ico">🛠️</span><div class="tlc-title">อบรมเตรียมพร้อม</div><div class="tlc-desc">Excel · Power BI · English · บุคลิกภาพ & Mindset</div></div></div>
+        <div class="tl-step reveal"><div class="tls-dot">6</div><div class="tl-card2"><span class="tlc-ico">📨</span><div class="tlc-title">ส่งเอกสารสมัคร</div><div class="tlc-desc">ยื่นใบสมัคร (สก.มช.2) ไปยังสถานประกอบการ</div></div></div>
+        <div class="tl-step reveal"><div class="tls-dot">7</div><div class="tl-card2"><span class="tlc-ico">📬</span><div class="tlc-title">ติดตามสถานะ</div><div class="tlc-desc">รอผลการตอบรับจากหน่วยงานที่สมัคร</div></div></div>
+        <div class="tl-step key reveal"><div class="tls-dot">8</div><div class="tl-card2"><span class="tlc-badge">บังคับ</span><span class="tlc-ico">🎓</span><div class="tlc-title">ปฐมนิเทศสหกิจ</div><div class="tlc-desc">เข้าร่วมปฐมนิเทศก่อนออกปฏิบัติงานจริง</div></div></div>
+        <div class="tl-step key reveal"><div class="tls-dot">9</div><div class="tl-card2"><span class="tlc-badge">ลงทะเบียน</span><span class="tlc-ico">📝</span><div class="tlc-title">ลงทะเบียน 751449</div><div class="tlc-desc">ลงทะเบียนวิชา + ทำคาดว่าจะสำเร็จการศึกษา (ถ้ามี)</div></div></div>
+        <div class="tl-step final reveal"><div class="tls-dot">10</div><div class="tl-card2"><span class="tlc-badge">🎉 ปลายทาง!</span><span class="tlc-ico">🚀</span><div class="tlc-title">ปฏิบัติสหกิจจริง!</div><div class="tlc-desc"><b>16 สัปดาห์ · ≥480 ชั่วโมง</b> ต่อเนื่องในสถานประกอบการ — ลุยเลย!</div></div></div>
       </div>
-    </div>
-    <div class="note reveal" style="margin-top:4px">
-      ⏰ <b>เริ่มเตรียมตัวตั้งแต่ต้นปีที่ 3!</b> กระบวนการทั้งหมดใช้เวลาหลายเดือน — อย่ารอให้ใกล้ deadline ครับ
     </div>
 
-    <!-- 5. กฎระเบียบสำคัญ -->
-    <div class="coop-sec-head reveal">
-      <span class="csh-ico">⚖️</span>
-      <h3>กฎระเบียบสำคัญที่ต้องรู้</h3>
-      <span class="csh-sub">ห้ามพลาด!</span>
+    <!-- 5. ช่วงเวลา -->
+    <div class="coop-sec" id="co-when">
+      <div class="coop-sec-head reveal">
+        <span class="csh-ico">📅</span>
+        <h3>ช่วงเวลารับสมัคร & ปฏิบัติสหกิจ</h3>
+        <span class="csh-sub">เริ่มเมื่อไหร่?</span>
+      </div>
+      <div class="coop-timeline reveal">
+        <div class="tl-card">
+          <div class="tl-head sem1">📘 ภาคการศึกษาที่ 1</div>
+          <div class="tl-body">
+            <div class="tl-row"><span class="tl-label">📢 รับสมัคร</span><span class="tl-val"><b>ตุลาคม – พฤศจิกายน</b> (ปีก่อน)</span></div>
+            <div class="tl-row"><span class="tl-label">💼 ปฏิบัติสหกิจ</span><span class="tl-val"><b>มิถุนายน – ตุลาคม</b></span></div>
+            <div class="tl-row"><span class="tl-label">💡 เหมาะกับ</span><span class="tl-val">น้องที่อยากไปช่วงต้นปีการศึกษา</span></div>
+          </div>
+        </div>
+        <div class="tl-card">
+          <div class="tl-head sem2">📙 ภาคการศึกษาที่ 2</div>
+          <div class="tl-body">
+            <div class="tl-row"><span class="tl-label">📢 รับสมัคร</span><span class="tl-val"><b>พฤษภาคม – มิถุนายน</b></span></div>
+            <div class="tl-row"><span class="tl-label">💼 ปฏิบัติสหกิจ</span><span class="tl-val"><b>พฤศจิกายน – มีนาคม</b></span></div>
+            <div class="tl-row"><span class="tl-label">💡 เหมาะกับ</span><span class="tl-val">น้องที่อยากไปช่วงต้นปีใหม่</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="note reveal" style="margin-top:4px">
+        ⏰ <b>เริ่มเตรียมตัวตั้งแต่ต้นปี 3!</b> กระบวนการทั้งหมดใช้เวลาหลายเดือน — อย่ารอใกล้ deadline นะครับ
+      </div>
     </div>
-    <div class="rules-list reveal">
-      <div class="rule-item rule-ok">
-        <span class="rule-ico">⏱️</span>
-        <div class="rule-body">
-          <div class="rule-title">ต้องปฏิบัติงานอย่างน้อย 16 สัปดาห์ต่อเนื่อง</div>
-          <div class="rule-desc">รวม <b>ไม่น้อยกว่า 480 ชั่วโมง</b> ยกเว้นกรณีมีเหตุอันควรที่ได้รับการอนุมัติ</div>
+
+    <!-- 6. รีวิวรุ่นพี่ -->
+    <div class="coop-sec" id="co-review">
+      <div class="coop-sec-head reveal">
+        <span class="csh-ico">💬</span>
+        <h3>เสียงจากรุ่นพี่ที่ไปสหกิจมาแล้ว</h3>
+        <span class="csh-sub">ของจริง!</span>
+      </div>
+      <div class="review-grid reveal">
+        <div class="review-card">
+          <div class="rv-top" style="background:linear-gradient(135deg,#1f6b63,#0f4a44)"><span class="rv-quote">"</span><div class="rv-org">Banpu (บ้านปู)</div><div class="rv-role">ฝ่ายจัดการสินทรัพย์และหนี้สิน (ALM)</div></div>
+          <div class="rv-body">โอกาสดีมากที่ได้ฝึกเต็ม 4 เดือน ได้ความรู้และประสบการณ์ตรงจากการลงมือทำจริง แม้บางงานไม่ตรงกับที่เรียนก็ได้พัฒนาศักยภาพในศาสตร์ด้านอื่นที่จะเป็นประโยชน์ในอนาคต พี่ ๆ น่ารักและเป็นกันเอง<span class="rv-tag" style="background:var(--co-mint-soft);color:#1f6b63">💼 สายการเงินองค์กร</span></div>
+        </div>
+        <div class="review-card">
+          <div class="rv-top" style="background:linear-gradient(135deg,#5e4470,#3a2558)"><span class="rv-quote">"</span><div class="rv-org">TDRI</div><div class="rv-role">ฝ่ายจัดการความรู้และสื่อสารสาธารณะ</div></div>
+          <div class="rv-body">ได้ประสบการณ์การทำงานมากมาย ทั้งการออกไอเดีย ความคิดสร้างสรรค์ และความรู้จากงานวิจัยหลากหลาย ได้เรียนรู้กระบวนการทำงานจริงในองค์กร การประสานงาน และพัฒนาทักษะความสามารถของตัวเองตลอดการฝึก<span class="rv-tag" style="background:var(--co-grape-soft);color:#5e4470">🔬 สายวิจัย/Think Tank</span></div>
+        </div>
+        <div class="review-card">
+          <div class="rv-top" style="background:linear-gradient(135deg,#3d8bd4,#27679e)"><span class="rv-quote">"</span><div class="rv-org">สำนักงานสรรพากรพื้นที่เชียงใหม่ 1</div><div class="rv-role">ส่วนแนะนำและตรวจสอบภาษีอากร</div></div>
+          <div class="rv-body">ได้ฝึก soft skills หลายด้าน ทั้งภาษา ทักษะการติดต่อสื่อสารกับผู้คน และการให้บริการ ได้เรียนรู้เกี่ยวกับภาษีมากขึ้น ได้ลงพื้นที่จริง และนำประสบการณ์ไปปรับใช้ในการทำงานอนาคตได้<span class="rv-tag" style="background:var(--co-sky-soft);color:#27679e">🏛️ สายราชการ/ภาษี</span></div>
+        </div>
+        <div class="review-card">
+          <div class="rv-top" style="background:linear-gradient(135deg,#7d5bbe,#4a2f7a)"><span class="rv-quote">"</span><div class="rv-org">PEA (การไฟฟ้าส่วนภูมิภาค)</div><div class="rv-role">สาขาอำเภอป่าซาง</div></div>
+          <div class="rv-body">โอกาสที่ดีในการได้ลงมือปฏิบัติงานจริง พัฒนาทักษะหลายด้าน เช่น การทำงานร่วมกับผู้อื่น การมีวินัย การตรงต่อเวลา ความละเอียดรอบคอบ และความรับผิดชอบต่องานที่ได้รับมอบหมาย<span class="rv-tag" style="background:var(--co-grape-soft);color:#5e4470">⚡ สายรัฐวิสาหกิจ</span></div>
+        </div>
+        <div class="review-card">
+          <div class="rv-top" style="background:linear-gradient(135deg,#e0457f,#c0286b)"><span class="rv-quote">"</span><div class="rv-org">CP All</div><div class="rv-role">Business Analyst · แผนกบริหารผลิตภัณฑ์ (non-food)</div></div>
+          <div class="rv-body">ได้เรียนรู้ระบบการทำงานและการบริหารของบริษัทมหาชน ฝึกการทำงานร่วมกับผู้อื่นและการสื่อสารให้ชัดเจน ได้ค้นพบมุมมองใหม่ในฐานะผู้ประกอบการร้านสะดวกซื้อ และพัฒนาความคิดสร้างสรรค์<span class="rv-tag" style="background:var(--co-pink-soft);color:#c0286b">📈 สายธุรกิจ/Analyst</span></div>
+        </div>
+        <div class="review-card">
+          <div class="rv-top" style="background:linear-gradient(135deg,#f2a93b,#cc8420)"><span class="rv-quote">"</span><div class="rv-org">The Standard</div><div class="rv-role">สายงานสื่อ / Content</div></div>
+          <div class="rv-body">ช่วงเวลาดี ๆ ที่ได้เรียนรู้ประสบการณ์ทำงานจริง ได้ทั้งคำติและคำชมเพื่อปรับปรุงและพัฒนา รวมทั้งมิตรภาพดี ๆ ที่เกิดจากการฝึกงานทั้งจากพี่เลี้ยงและเพื่อนร่วม ถือเป็นการฝึกงานที่เป็นประโยชน์มาก<span class="rv-tag" style="background:var(--co-sun-soft);color:#9a6512">📰 สายสื่อ/Content</span></div>
+        </div>
+        <div class="review-card">
+          <div class="rv-top" style="background:linear-gradient(135deg,#1f6b63,#13524b)"><span class="rv-quote">"</span><div class="rv-org">Aira Asset Management</div><div class="rv-role">Fund Manager Assistant · Analyst</div></div>
+          <div class="rv-body">ได้เรียนรู้การทำงานในอุตสาหกรรมกองทุนจริง ได้ลองประยุกต์วิธีคิดทางเศรษฐศาสตร์กับการลงทุน พี่ ๆ ทุกคนน่ารักและดูแลดีมาก พร้อมแนะนำการทำงานตั้งแต่ Basic จนถึง Advance รวมถึงให้คำแนะนำสำหรับการเติบโตในอนาคต<span class="rv-tag" style="background:var(--co-mint-soft);color:#1f6b63">💰 สายการลงทุน/กองทุน</span></div>
         </div>
       </div>
-      <div class="rule-item rule-warn">
-        <span class="rule-ico">🚫</span>
-        <div class="rule-body">
-          <div class="rule-title">ห้ามลงทะเบียนวิชาอื่นในภาคเดียวกัน</div>
-          <div class="rule-desc">ภาคที่ลงทะเบียน 751449 <b>ไม่สามารถลงวิชาอื่นได้เลย</b> — วางแผนให้เรียบร้อยก่อน</div>
-        </div>
+      <div class="note reveal" style="margin-top:6px">
+        💡 รุ่นพี่ Econ มช. ไปสหกิจในหลากหลายองค์กร — ทั้งภาครัฐ รัฐวิสาหกิจ บริษัทมหาชน สถาบันวิจัย สื่อ และบริษัทการลงทุน เลือกที่ตรงกับสายอาชีพที่น้องฝันได้เลย!
       </div>
-      <div class="rule-item rule-warn">
-        <span class="rule-ico">🔒</span>
-        <div class="rule-body">
-          <div class="rule-title">ห้ามยกเลิกหรือเปลี่ยนสถานประกอบการ</div>
-          <div class="rule-desc">หลังได้รับหนังสือตอบรับ <b>ไม่ว่าด้วยเหตุผลใดก็ตาม</b> — หากยกเลิกโดยไม่ได้รับอนุมัติ ได้เกรด <b>"U"</b> ทันที</div>
-        </div>
+    </div>
+
+    <!-- 7. กฎ -->
+    <div class="coop-sec" id="co-rules">
+      <div class="coop-sec-head reveal">
+        <span class="csh-ico">⚖️</span>
+        <h3>กฎระเบียบสำคัญที่ต้องรู้</h3>
+        <span class="csh-sub">ห้ามพลาด!</span>
       </div>
-      <div class="rule-item rule-warn">
-        <span class="rule-ico">📌</span>
-        <div class="rule-body">
-          <div class="rule-title">ห้ามเลื่อนการไปฝึกสหกิจ</div>
-          <div class="rule-desc">ยกเว้น <b>กรณีเหตุสุดวิสัย</b> และต้องได้รับความเห็นชอบจากคณะกรรมการสหกิจเท่านั้น</div>
-        </div>
+      <div class="rules-list reveal">
+        <div class="rule-item rule-ok"><span class="rule-ico">⏱️</span><div class="rule-body"><div class="rule-title">ต้องปฏิบัติงานอย่างน้อย 16 สัปดาห์ต่อเนื่อง</div><div class="rule-desc">รวม <b>ไม่น้อยกว่า 480 ชั่วโมง</b> ยกเว้นกรณีมีเหตุอันควรที่ได้รับอนุมัติ</div></div></div>
+        <div class="rule-item rule-warn"><span class="rule-ico">🚫</span><div class="rule-body"><div class="rule-title">ห้ามลงทะเบียนวิชาอื่นในภาคเดียวกัน</div><div class="rule-desc">ภาคที่ลงทะเบียน 751449 <b>ลงวิชาอื่นไม่ได้เลย</b> — วางแผนให้เรียบร้อยก่อน</div></div></div>
+        <div class="rule-item rule-warn"><span class="rule-ico">🔒</span><div class="rule-body"><div class="rule-title">ห้ามยกเลิก/เปลี่ยนสถานประกอบการ</div><div class="rule-desc">หลังได้รับหนังสือตอบรับ <b>ไม่ว่าเหตุผลใด</b> — หากยกเลิกโดยไม่ได้รับอนุมัติ ได้เกรด <b>"U"</b> ทันที</div></div></div>
+        <div class="rule-item rule-warn"><span class="rule-ico">📌</span><div class="rule-body"><div class="rule-title">ห้ามเลื่อนการไปฝึกสหกิจ</div><div class="rule-desc">ยกเว้น <b>กรณีเหตุสุดวิสัย</b> และต้องได้รับความเห็นชอบจากคณะกรรมการสหกิจเท่านั้น</div></div></div>
+        <div class="rule-item rule-info"><span class="rule-ico">📝</span><div class="rule-body"><div class="rule-title">ต้องจัดทำรายงานสหกิจ</div><div class="rule-desc">รายงาน A4 (TH Sarabun PSK 16pt): บทนำ · งานที่รับผิดชอบ · โครงการ/โครงงาน · สรุปผล · เอกสารอ้างอิง</div></div></div>
+        <div class="rule-item rule-info"><span class="rule-ico">🎓</span><div class="rule-body"><div class="rule-title">เกณฑ์สำเร็จการศึกษา</div><div class="rule-desc">GPA สะสม <b>≥ 2.00</b> · Major GPA <b>≥ 2.00</b> · ผ่าน CMU-eGrad <b>≥ 70%</b> (นานาชาติ 90%)</div></div></div>
       </div>
-      <div class="rule-item rule-info">
-        <span class="rule-ico">📝</span>
-        <div class="rule-body">
-          <div class="rule-title">ต้องจัดทำรายงานสหกิจ</div>
-          <div class="rule-desc">รายงาน A4 (TH Sarabun PSK 16pt) ประกอบด้วย บทนำ · งานที่รับผิดชอบ · โครงการ/โครงงาน · สรุปผล · เอกสารอ้างอิง</div>
-        </div>
+    </div>
+
+    <!-- 8. FAQ -->
+    <div class="coop-sec" id="co-faq">
+      <div class="coop-sec-head reveal">
+        <span class="csh-ico">❓</span>
+        <h3>คำถามที่พบบ่อย (FAQ)</h3>
+        <span class="csh-sub">สงสัยอะไร?</span>
       </div>
-      <div class="rule-item rule-info">
-        <span class="rule-ico">🎓</span>
-        <div class="rule-body">
-          <div class="rule-title">เกณฑ์สำเร็จการศึกษา</div>
-          <div class="rule-desc">GPA สะสม <b>≥ 2.00</b> · Major GPA <b>≥ 2.00</b> · ผ่าน CMU-eGrad <b>≥ 70%</b> (หลักสูตรนานาชาติ 90%)</div>
-        </div>
+      <div class="faq-list reveal">
+        <div class="faq-item"><div class="faq-q"><span class="faq-ico">💰</span> สหกิจได้เงินเดือนไหม?<span class="faq-caret">▾</span></div><div class="faq-a">ขึ้นอยู่กับสถานประกอบการแต่ละแห่ง — <b>บางแห่งมีค่าตอบแทนและสวัสดิการให้</b> บางแห่งอาจไม่มี ก่อนตัดสินใจสมัครควรสอบถามรายละเอียดกับองค์กรนั้น ๆ โดยตรง แต่สิ่งที่ได้แน่นอนคือประสบการณ์และ Connection ที่มีค่ามาก</div></div>
+        <div class="faq-item"><div class="faq-q"><span class="faq-ico">🏢</span> เลือกบริษัทเองได้ไหม?<span class="faq-caret">▾</span></div><div class="faq-a">ได้ครับ! น้อง <b>ค้นหาและเลือกบริษัท/องค์กรที่สนใจเองได้</b> (ขั้นตอนที่ 2) จากนั้นยื่นเอกสารสมัครผ่านหน่วยสหกิจ ควรเลือกที่ตรงกับสายอาชีพที่อยากทำในอนาคตเพื่อให้ได้ประโยชน์สูงสุด</div></div>
+        <div class="faq-item"><div class="faq-q"><span class="faq-ico">⚠️</span> ถ้าได้เกรด "U" จะเป็นยังไง?<span class="faq-caret">▾</span></div><div class="faq-a">เกรด <b>"U" (Unsatisfactory)</b> หมายถึงไม่ผ่าน — จะได้เมื่อยกเลิก/เปลี่ยนสถานประกอบการโดยไม่ได้รับอนุมัติ หรือประเมินผลไม่ผ่าน หากได้ U ต้องปรึกษาอาจารย์ที่ปรึกษาเรื่องแผนการเรียนต่อไป ดังนั้นควรปฏิบัติตามกฎอย่างเคร่งครัด</div></div>
+        <div class="faq-item"><div class="faq-q"><span class="faq-ico">📝</span> ต้องทำรายงานยังไง?<span class="faq-caret">▾</span></div><div class="faq-a">จัดทำรายงานด้วย MS Word กระดาษ A4 ฟอนต์ <b>TH Sarabun PSK/New ขนาด 16pt</b> เนื้อหาประกอบด้วย: ข้อมูลนักศึกษา · บทนำ · งานที่รับผิดชอบ · โครงการ/โครงงาน · สรุปผลการปฏิบัติงาน · กิตติกรรมประกาศ · เอกสารอ้างอิง · ภาคผนวก (ถ้ามี)</div></div>
+        <div class="faq-item"><div class="faq-q"><span class="faq-ico">📉</span> ถ้าเกรดไม่ถึงเกณฑ์ทำไงดี?<span class="faq-caret">▾</span></div><div class="faq-a">ต้องมี GPA สะสม + เกรดวิชาเอกตามเกณฑ์ (รหัส 65 ≥ 2.00 / รหัส 66 ขึ้นไป ≥ 2.25) หากยังไม่ถึง แนะนำให้ <b>เร่งเก็บเกรดในเทอมก่อนหน้า</b> หรือพิจารณาเลือกหลักสูตรปัญหาพิเศษ (แผน A/B) แทน ซึ่งไม่ต้องออกสหกิจ</div></div>
+        <div class="faq-item"><div class="faq-q"><span class="faq-ico">📅</span> ไปสหกิจแล้วจบช้าไหม?<span class="faq-caret">▾</span></div><div class="faq-a">ไม่ช้าครับ! สหกิจถูกออกแบบให้อยู่ใน <b>ปี 4 เทอม 2</b> เป็นส่วนหนึ่งของหลักสูตรปกติ 4 ปี (129–135 หน่วยกิต) — แค่ต้องวางแผนเก็บวิชาอื่นให้ครบก่อนถึงเทอมสหกิจ เพราะเทอมนั้นจะลงได้แค่วิชา 751449 เท่านั้น</div></div>
       </div>
     </div>
 
@@ -3503,6 +3609,7 @@
   </section>
 
   <!-- ===== PATHWAYS & CAREERS ===== -->
+
   <section class="year" data-year="path">
     <div class="paths">
       <h2>🔑 4 เส้นทางวิชาต่อหลัก</h2>
@@ -3985,6 +4092,8 @@
     showYear(y);
     document.getElementById('searchBox').value='';doSearch('');
     window.scrollTo({top:document.querySelector('.toolbar').offsetTop-60,behavior:'smooth'});
+    // reset quick-nav ตัวแรกเป็น active เมื่อเข้าแท็บสหกิจ
+    if(y==='coop' && window.__resetCoopNav__) window.__resetCoopNav__();
   }));
 
   // ปุ่มสลับหลักสูตร
@@ -5152,6 +5261,76 @@
   // initial render
   render(window.__getProg__ ? window.__getProg__() : 'A');
   window.__renderFlow__ = () => render(window.__getProg__ ? window.__getProg__() : 'A');
+})();
+
+/* ===== COOP TAB INTERACTIONS ===== */
+(function(){
+  // ---- FAQ accordion ----
+  document.querySelectorAll('.faq-item .faq-q').forEach(q=>{
+    q.addEventListener('click',()=>{
+      const item=q.closest('.faq-item');
+      const wasOpen=item.classList.contains('open');
+      // ปิดทุกอันก่อน (เปิดทีละข้อ)
+      document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+      if(!wasOpen) item.classList.add('open');
+    });
+  });
+
+  // ---- Quick-nav: smooth scroll + scroll-spy ----
+  const coopNav = document.getElementById('coopNav');
+  if(!coopNav) return;
+  const navLinks = [...coopNav.querySelectorAll('a')];
+  const sections = navLinks.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+  // smooth scroll เมื่อคลิก
+  navLinks.forEach(a=>{
+    a.addEventListener('click',e=>{
+      e.preventDefault();
+      const target=document.querySelector(a.getAttribute('href'));
+      if(!target) return;
+      const tabsBarEl=document.querySelector('.tabs');
+      const tabsH = tabsBarEl ? (parseFloat(getComputedStyle(tabsBarEl).top)||52)+tabsBarEl.offsetHeight : 100;
+      const navH = coopNav.offsetHeight + 8;
+      const y = target.getBoundingClientRect().top + window.pageYOffset - tabsH - navH;
+      window.scrollTo({top:y,behavior:'smooth'});
+    });
+  });
+
+  // scroll-spy: highlight section ที่กำลังดู
+  let spyTicking=false;
+  function spy(){
+    spyTicking=false;
+    const tabsBarEl=document.querySelector('.tabs');
+    const tabsH = tabsBarEl ? (parseFloat(getComputedStyle(tabsBarEl).top)||52)+tabsBarEl.offsetHeight : 100;
+    const navH = coopNav.offsetHeight + tabsH + 20;
+    let activeIdx=0;
+    sections.forEach((sec,i)=>{
+      if(sec.getBoundingClientRect().top <= navH) activeIdx=i;
+    });
+    navLinks.forEach((a,i)=>a.classList.toggle('active',i===activeIdx));
+  }
+  window.addEventListener('scroll',()=>{
+    // ทำงานเฉพาะตอนแท็บ coop แสดงอยู่
+    const coopSec=document.querySelector('.year[data-year="coop"]');
+    if(!coopSec || !coopSec.classList.contains('show')) return;
+    if(!spyTicking){spyTicking=true;requestAnimationFrame(spy);}
+  },{passive:true});
+
+  // reset เป็นลิงก์แรกตอนเพิ่งเข้าแท็บ
+  window.__resetCoopNav__=()=>{
+    navLinks.forEach((a,i)=>a.classList.toggle('active',i===0));
+  };
+
+  // ตั้ง top ของ coop-nav ให้พอดีใต้แถบ tabs (ความสูง tabs ไม่คงที่เพราะ wrap ได้)
+  const tabsBar=document.querySelector('.tabs');
+  function setNavTop(){
+    if(!tabsBar) return;
+    const tabsTop=parseFloat(getComputedStyle(tabsBar).top)||52;
+    const h=tabsBar.offsetHeight;
+    document.documentElement.style.setProperty('--coop-nav-top',(tabsTop+h-1)+'px');
+  }
+  setNavTop();
+  window.addEventListener('resize',setNavTop,{passive:true});
 })();
 
 </script>
