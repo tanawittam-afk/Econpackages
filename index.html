@@ -26,6 +26,13 @@
     --plum:#5e4470;           /* เอกเลือก */
     --plum-soft:#e3d9ea;
     --slate:#5c6678; --line:#ddd5c4; --ok:#2f7d4f;
+
+    /* pre-computed fallbacks สำหรับ color-mix() (browser เก่า) */
+    --gold-border-mix:#d9c28a;   /* gold 30% + line */
+    --sea-border-mix:#8fb8b3;    /* sea 30% + line */
+    --clay-border-mix:#c89180;   /* clay 30% + line */
+    --plum-border-mix:#a090ad;   /* plum 30% + line */
+    --ok-border-mix:#8ec2a3;     /* ok 40% + line */
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
@@ -148,44 +155,138 @@
   .term-title h3{font-family:"Noto Serif Thai",serif;font-size:1.05rem;font-weight:700;color:var(--navy)}
   .term-cr{font-size:.76rem;font-weight:700;color:var(--navy);background:var(--gold-soft);padding:3px 11px;border-radius:20px}
 
-  /* COURSE CARD */
-  .course{border:1px solid var(--line);border-left:4px solid var(--line);border-radius:12px;
-    padding:11px 14px;margin-bottom:9px;background:#fff;transition:transform .18s,box-shadow .18s,background .18s}
-  .course:hover{box-shadow:0 6px 20px rgba(22,35,63,.08);transform:translateY(-1px)}
-  .course.ge{border-left-color:var(--gold)} .course.core{border-left-color:var(--sea)}
-  .course.major{border-left-color:var(--clay)} .course.elec{border-left-color:var(--plum)}
-  .course.free{border-left-color:var(--slate)}
-  .course.checked{background:linear-gradient(90deg,#f3f9f4,#fff);border-color:#c2ddc6}
-  .course.dim{opacity:.32}
-  .c-row{display:flex;gap:11px;align-items:flex-start}
-  .chk{flex:none;width:22px;height:22px;border:2px solid var(--line);border-radius:7px;
-    cursor:pointer;display:flex;align-items:center;justify-content:center;margin-top:2px;
-    transition:.18s;background:#fff;font-size:.8rem;color:#fff}
-  .chk:hover{border-color:var(--ok);transform:scale(1.08)}
-  .course.checked .chk{background:var(--ok);border-color:var(--ok)}
-  .course.checked .chk::after{content:"✓"}
-  .c-body{flex:1;cursor:pointer}
+  /* ============================================================
+     COURSE CARD — v2 (top strip + thick left + tint + new chk)
+     ============================================================ */
+
+  /* ── CSS custom props ต่อการ์ด (overridden per class below) ── */
+  .course{
+    --cc:#ddd5c4;          /* border/accent colour — default */
+    --cc-soft:#f7f4ed;     /* tint colour */
+    --cc-label:"วิชา";    /* label text (ไม่ได้ใช้แสดงผล แค่ semantic) */
+  }
+  .course.ge   {--cc:var(--gold);  --cc-soft:var(--gold-soft)}
+  .course.core {--cc:var(--sea);   --cc-soft:var(--sea-soft)}
+  .course.major{--cc:var(--clay);  --cc-soft:var(--clay-soft)}
+  .course.elec {--cc:var(--plum);  --cc-soft:var(--plum-soft)}
+  .course.free {--cc:var(--slate); --cc-soft:#edeae2}
+
+  /* ── กล่องหลัก ── */
+  .course{
+    position:relative;
+    border:1.5px solid color-mix(in srgb,var(--cc) 30%,var(--line));
+    border-left:6px solid var(--cc);
+    border-radius:14px;
+    padding:0;                    /* padding ย้ายเข้า .c-inner */
+    margin-bottom:10px;
+    background:#fff;
+    overflow:hidden;              /* clip top-strip pseudo */
+    transition:transform .2s,box-shadow .2s,border-color .2s;
+    box-shadow:0 1px 4px rgba(22,35,63,.05)}
+
+  /* ── Top colour strip ── */
+  .course::before{
+    content:"";display:block;height:4px;
+    background:linear-gradient(90deg,var(--cc),color-mix(in srgb,var(--cc) 30%,transparent));
+    border-radius:0}
+
+  /* ── Background tint ── */
+  .course::after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(135deg,color-mix(in srgb,var(--cc) 6%,transparent),transparent 55%)}
+
+  /* ── hover ── */
+  .course:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 24px rgba(22,35,63,.11);
+    border-color:var(--cc)}
+
+  /* ── checked state ── */
+  .course.checked{
+    background:linear-gradient(135deg,color-mix(in srgb,var(--ok) 8%,#fff),#fff);
+    border-color:color-mix(in srgb,var(--ok) 40%,var(--line))}
+  .course.checked::before{background:linear-gradient(90deg,var(--ok),color-mix(in srgb,var(--ok) 20%,transparent))}
+  .course.checked::after{background:linear-gradient(135deg,color-mix(in srgb,var(--ok) 7%,transparent),transparent 55%)}
+
+  .course.dim{opacity:.3;pointer-events:none}
+
+  /* ── inner padding wrapper (เพราะ padding ถูก ::before กิน) ── */
+  .c-row{display:flex;gap:12px;align-items:flex-start;padding:12px 15px 12px 12px;position:relative;z-index:1}
+
+  /* ── Checkbox ── */
+  .chk{
+    flex:none;width:24px;height:24px;
+    border:2px solid color-mix(in srgb,var(--cc) 50%,var(--line));
+    border-radius:8px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    margin-top:2px;
+    background:#fff;font-size:.85rem;color:transparent;
+    transition:background .18s,border-color .18s,transform .18s,box-shadow .18s}
+  .chk:hover{
+    border-color:var(--cc);
+    box-shadow:0 0 0 3px color-mix(in srgb,var(--cc) 18%,transparent);
+    transform:scale(1.1)}
+  .course.checked .chk{
+    background:var(--ok);border-color:var(--ok);color:#fff;
+    box-shadow:0 2px 8px rgba(47,125,79,.35)}
+  .course.checked .chk::after{content:"✓";font-weight:800}
+
+  /* ── Body ── */
+  .c-body{flex:1;cursor:pointer;min-width:0}
   .c-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
-  .c-code{font-size:.7rem;font-weight:700;color:var(--gold);letter-spacing:.03em}
-  .c-name{font-weight:700;font-size:.95rem;margin-top:1px;color:var(--ink)}
-  .c-name .en{display:block;font-weight:400;font-size:.74rem;color:var(--slate);font-style:italic}
-  .c-cr{font-size:.72rem;color:var(--slate);flex:none;white-space:nowrap}
-  .c-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
-  .tag{font-size:.67rem;font-weight:700;padding:2px 9px;border-radius:20px}
-  .tag.pre{background:var(--clay-soft);color:var(--clay)}
-  .tag.unlock{background:var(--sea-soft);color:var(--sea)}
-  .tag.q{background:var(--gold-soft);color:#7a5d12;border:1px dashed var(--gold)}
-  .tag.cat{background:var(--paper2);color:var(--slate)}
-  .chevron{font-size:.68rem;color:var(--gold);transition:.2s;display:inline-block}
+
+  /* รหัสวิชา */
+  .c-code{
+    font-size:.72rem;font-weight:800;letter-spacing:.04em;
+    color:var(--cc);
+    display:inline-flex;align-items:center;gap:5px}
+
+  /* ชื่อวิชา */
+  .c-name{font-weight:700;font-size:.97rem;margin-top:2px;color:var(--navy);line-height:1.35}
+  .c-name .en{display:block;font-weight:400;font-size:.74rem;color:var(--slate);font-style:italic;margin-top:1px}
+
+  /* หน่วยกิต badge */
+  .c-cr{
+    flex:none;white-space:nowrap;
+    font-size:.72rem;font-weight:800;
+    background:color-mix(in srgb,var(--cc) 14%,#fff);
+    color:color-mix(in srgb,var(--cc) 80%,var(--navy));
+    border:1.5px solid color-mix(in srgb,var(--cc) 30%,var(--line));
+    padding:3px 10px;border-radius:20px;
+    display:inline-flex;align-items:center;gap:4px;margin-top:2px}
+
+  /* chevron */
+  .chevron{font-size:.7rem;color:var(--cc);transition:.22s cubic-bezier(.34,1.56,.64,1);display:inline-block;margin-left:2px}
   .course.open .chevron{transform:rotate(90deg)}
-  .c-detail{max-height:0;overflow:hidden;font-size:.85rem;color:var(--slate);
-    transition:max-height .3s ease,opacity .3s ease,margin .3s ease,padding .3s ease;opacity:0}
-  .course.open .c-detail{max-height:1400px;opacity:1;margin-top:11px;padding-top:11px;border-top:1px solid var(--line)}
-  .c-detail .flow{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-top:8px;font-size:.82rem}
-  .pill{padding:3px 10px;border-radius:8px;font-weight:700;font-size:.77rem}
+
+  /* ── Tags ── */
+  .c-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+  .tag{font-size:.68rem;font-weight:800;padding:3px 10px;border-radius:20px;
+    display:inline-flex;align-items:center;gap:3px;letter-spacing:.01em}
+  .tag.pre   {background:var(--clay-soft);color:var(--clay);border:1px solid color-mix(in srgb,var(--clay) 20%,transparent)}
+  .tag.unlock{background:var(--sea-soft); color:var(--sea); border:1px solid color-mix(in srgb,var(--sea)  20%,transparent)}
+  .tag.q     {background:var(--gold-soft);color:#7a5d12;   border:1px dashed var(--gold)}
+  .tag.cat   {background:var(--paper2);   color:var(--slate)}
+
+  /* ── Detail panel ── */
+  .c-detail{
+    max-height:0;overflow:hidden;opacity:0;
+    font-size:.86rem;color:var(--slate);line-height:1.65;
+    transition:max-height .3s ease,opacity .28s ease,padding .28s ease}
+  .course.open .c-detail{
+    max-height:1600px;opacity:1;
+    padding:12px 15px 14px;
+    border-top:1.5px solid color-mix(in srgb,var(--cc) 22%,var(--line));
+    background:color-mix(in srgb,var(--cc) 3%,#fff)}
+  .c-detail .flow{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-top:9px;font-size:.83rem}
+
+  /* pills ใน c-detail */
+  .pill{padding:4px 11px;border-radius:9px;font-weight:700;font-size:.77rem;
+    transition:transform .15s,box-shadow .15s}
+  .pill:hover{transform:translateY(-1px);box-shadow:0 3px 8px rgba(22,35,63,.1)}
   .pill.this{background:var(--navy);color:#fff}
-  .pill.other{background:var(--paper2);color:var(--ink);border:1px solid var(--line)}
-  .arrow{color:var(--gold);font-weight:800}
+  .pill.other{background:var(--paper2);color:var(--ink);border:1.5px solid var(--line)}
+  .arrow{color:var(--gold);font-weight:800;font-size:1rem}
 
   .opts{margin-top:11px;border:1px solid var(--line);border-radius:10px;max-height:260px;overflow-y:auto;background:var(--paper)}
   .opts-head{position:sticky;top:0;background:var(--paper2);padding:7px 12px;font-size:.76rem;font-weight:700;color:var(--ink);border-bottom:1px solid var(--line)}
