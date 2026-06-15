@@ -260,6 +260,115 @@
   .course.open .chevron{transform:rotate(90deg)}
 
   /* ── Tags ── */
+
+  /* ── GRADE MODAL — ปุ่มใต้การ์ด + Modal กลางจอ ── */
+
+  /* ปุ่ม 📊 ใต้การ์ดวิชา */
+  .grade-open-btn{
+    display:flex;align-items:center;justify-content:center;gap:6px;
+    width:100%;margin-top:8px;
+    padding:7px 0;border-radius:10px;
+    background:var(--paper2);border:1.5px dashed var(--line);
+    color:var(--slate);font-size:.78rem;font-weight:700;
+    cursor:pointer;font-family:inherit;transition:.18s;
+    letter-spacing:.01em}
+  .grade-open-btn:hover{
+    background:var(--navy);border-color:var(--navy);color:#fff;
+    border-style:solid;transform:translateY(-1px);
+    box-shadow:0 4px 14px rgba(22,35,63,.18)}
+  .grade-open-btn:active{transform:translateY(0)}
+  .grade-open-btn .gb-ico{font-size:.95rem}
+
+  /* Overlay */
+  .grade-modal-overlay{
+    position:fixed;inset:0;z-index:1200;
+    background:rgba(15,20,35,.72);
+    backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+    display:flex;align-items:center;justify-content:center;
+    padding:16px;
+    opacity:0;pointer-events:none;transition:opacity .22s ease}
+  .grade-modal-overlay.open{opacity:1;pointer-events:auto}
+
+  /* Modal กล่อง */
+  .grade-modal{
+    background:#1a1f2e;border-radius:20px;
+    width:100%;max-width:440px;max-height:86vh;
+    overflow-y:auto;overscroll-behavior:contain;
+    box-shadow:0 24px 60px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.08);
+    transform:translateY(20px) scale(.97);transition:transform .22s ease;
+    scrollbar-width:thin;scrollbar-color:#2e3650 transparent}
+  .grade-modal::-webkit-scrollbar{width:5px}
+  .grade-modal::-webkit-scrollbar-thumb{background:#2e3650;border-radius:5px}
+  .grade-modal-overlay.open .grade-modal{transform:translateY(0) scale(1)}
+
+  /* Modal header */
+  .gm-head{
+    position:sticky;top:0;z-index:2;
+    background:#1a1f2e;border-bottom:1px solid rgba(255,255,255,.08);
+    padding:16px 18px 14px;
+    display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .gm-title{
+    font-family:"Noto Serif Thai",serif;font-size:1rem;font-weight:700;
+    color:#e2e8f0;display:flex;align-items:center;gap:8px}
+  .gm-title::before{content:"📊";font-size:1.1rem}
+  .gm-close{
+    flex:none;width:30px;height:30px;border-radius:50%;
+    background:rgba(255,255,255,.08);border:none;color:#94a3b8;
+    font-size:1.1rem;cursor:pointer;display:flex;align-items:center;
+    justify-content:center;transition:.15s;font-family:inherit;padding:0}
+  .gm-close:hover{background:rgba(255,255,255,.16);color:#e2e8f0}
+
+  /* Modal body */
+  .gm-body{padding:14px 16px 18px}
+
+  /* Section label */
+  .gm-sec-label{
+    font-size:.65rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+    padding:4px 11px;border-radius:20px;margin-bottom:9px;display:inline-block}
+  .gm-sec-label.has-gpa{background:rgba(176,136,51,.25);color:#f0c060}
+  .gm-sec-label.no-gpa{background:rgba(100,116,139,.2);color:#94a3b8}
+
+  /* Grid rows */
+  .gm-rows{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:14px}
+  .gm-rows.wide{grid-template-columns:1fr 1fr 1fr}
+  .gm-row{
+    display:flex;align-items:center;gap:9px;
+    background:rgba(255,255,255,.05);border-radius:11px;
+    padding:8px 11px;border:1px solid rgba(255,255,255,.07);transition:.14s}
+  .gm-row:hover{background:rgba(255,255,255,.09)}
+
+  /* Badge */
+  .gm-badge{
+    flex:none;min-width:34px;text-align:center;
+    font-family:"Cormorant",Georgia,serif;font-size:1.25rem;font-weight:700;line-height:1}
+  .gm-badge.ga {color:#34d399}.gm-badge.gbp{color:#60a5fa}
+  .gm-badge.gb {color:#818cf8}.gm-badge.gcp{color:#f9a8d4}
+  .gm-badge.gc {color:#fcd34d}.gm-badge.gdp{color:#fb923c}
+  .gm-badge.gd {color:#f87171}.gm-badge.gf {color:#ef4444}
+  .gm-badge.gs {color:#34d399}.gm-badge.gu {color:#f87171}
+  .gm-badge.gw {color:#64748b}.gm-badge.gi {color:#fbbf24}
+  .gm-badge.gp {color:#a78bfa}.gm-badge.gv {color:#94a3b8}
+  .gm-badge.gx {color:#38bdf8}
+
+  /* Text */
+  .gm-info{min-width:0}
+  .gm-meaning{font-size:.8rem;font-weight:700;color:#e2e8f0;line-height:1.2}
+  .gm-meaning em{font-style:normal;font-size:.66rem;color:#64748b;display:block;margin-top:1px}
+  .gm-gpa{
+    font-size:.72rem;font-weight:800;color:#f0c060;
+    background:rgba(176,136,51,.18);border-radius:7px;
+    padding:2px 8px;white-space:nowrap;flex:none;margin-left:auto}
+
+  /* Divider */
+  .gm-div{height:1px;background:rgba(255,255,255,.07);margin:4px 0 13px}
+
+  /* Note */
+  .gm-note{
+    font-size:.72rem;color:#64748b;line-height:1.6;
+    background:rgba(255,255,255,.04);border-radius:10px;
+    padding:10px 12px;border:1px solid rgba(255,255,255,.06)}
+  .gm-note strong{color:#94a3b8}
+
   .c-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
   .tag{font-size:.68rem;font-weight:800;padding:3px 10px;border-radius:20px;
     display:inline-flex;align-items:center;gap:3px;letter-spacing:.01em}
@@ -5364,6 +5473,89 @@
   window.__renderFlow__ = () => render(window.__getProg__ ? window.__getProg__() : 'A');
 })();
 
+/* ===== GRADE MODAL ===== */
+(function(){
+
+  // 1. สร้าง Modal เดียวใส่ใน body
+  const MODAL_HTML = `
+<div class="grade-modal-overlay" id="gradeModalOverlay" role="dialog" aria-modal="true" aria-label="ตารางอักษรลำดับขั้น">
+  <div class="grade-modal">
+    <div class="gm-head">
+      <div class="gm-title">ตารางอักษรลำดับขั้น</div>
+      <button class="gm-close" id="gradeModalClose" aria-label="ปิด">✕</button>
+    </div>
+    <div class="gm-body">
+
+      <span class="gm-sec-label has-gpa">✨ มีค่า GPA</span>
+      <div class="gm-rows">
+        <div class="gm-row"><span class="gm-badge ga">A</span><div class="gm-info"><div class="gm-meaning">ดีเยี่ยม<em>EXCELLENT</em></div></div><span class="gm-gpa">4.00</span></div>
+        <div class="gm-row"><span class="gm-badge gbp">B+</span><div class="gm-info"><div class="gm-meaning">ดีมาก<em>VERY GOOD</em></div></div><span class="gm-gpa">3.50</span></div>
+        <div class="gm-row"><span class="gm-badge gb">B</span><div class="gm-info"><div class="gm-meaning">ดี<em>GOOD</em></div></div><span class="gm-gpa">3.00</span></div>
+        <div class="gm-row"><span class="gm-badge gcp">C+</span><div class="gm-info"><div class="gm-meaning">ดีพอใช้<em>FAIRLY GOOD</em></div></div><span class="gm-gpa">2.50</span></div>
+        <div class="gm-row"><span class="gm-badge gc">C</span><div class="gm-info"><div class="gm-meaning">พอใช้<em>FAIR</em></div></div><span class="gm-gpa">2.00</span></div>
+        <div class="gm-row"><span class="gm-badge gdp">D+</span><div class="gm-info"><div class="gm-meaning">อ่อน<em>POOR</em></div></div><span class="gm-gpa">1.50</span></div>
+        <div class="gm-row"><span class="gm-badge gd">D</span><div class="gm-info"><div class="gm-meaning">อ่อนมาก<em>VERY POOR</em></div></div><span class="gm-gpa">1.00</span></div>
+        <div class="gm-row"><span class="gm-badge gf">F</span><div class="gm-info"><div class="gm-meaning">ตก<em>FAILED</em></div></div><span class="gm-gpa">0.00</span></div>
+      </div>
+
+      <div class="gm-div"></div>
+
+      <span class="gm-sec-label no-gpa">🚫 ไม่มีค่า GPA</span>
+      <div class="gm-rows wide">
+        <div class="gm-row"><span class="gm-badge gs">S</span><div class="gm-info"><div class="gm-meaning">ผ่าน<em>SATISFACTORY</em></div></div></div>
+        <div class="gm-row"><span class="gm-badge gu">U</span><div class="gm-info"><div class="gm-meaning">ไม่ผ่าน<em>UNSATISFACTORY</em></div></div></div>
+        <div class="gm-row"><span class="gm-badge gv">V</span><div class="gm-info"><div class="gm-meaning">เข้าร่วม<em>VISITING</em></div></div></div>
+        <div class="gm-row"><span class="gm-badge gw">W</span><div class="gm-info"><div class="gm-meaning">ถอนวิชา<em>WITHDRAWN</em></div></div></div>
+        <div class="gm-row"><span class="gm-badge gi">I</span><div class="gm-info"><div class="gm-meaning">ยังไม่สิ้นสุด<em>INCOMPLETE</em></div></div></div>
+        <div class="gm-row"><span class="gm-badge gp">P</span><div class="gm-info"><div class="gm-meaning">กำลังเรียน<em>IN PROGRESS</em></div></div></div>
+        <div class="gm-row"><span class="gm-badge gx">CE</span><div class="gm-info"><div class="gm-meaning">นก.จากสอบ<em>FROM EXAM</em></div></div></div>
+        <div class="gm-row"><span class="gm-badge gx">CP</span><div class="gm-info"><div class="gm-meaning">นก.จากแฟ้ม<em>PORTFOLIO</em></div></div></div>
+        <div class="gm-row"><span class="gm-badge gx">CX</span><div class="gm-info"><div class="gm-meaning">ยกเว้นเรียน<em>EXEMPTION</em></div></div></div>
+      </div>
+
+      <div class="gm-note">
+        อักษร <strong>S, U, V, W, I, P, CE, CP, CS, CT, CX</strong>
+        จะ<strong>ไม่</strong>นำมาคำนวณ GPA — เกณฑ์จบ: GPA สะสม ≥ 2.00 และ Major GPA ≥ 2.00
+      </div>
+    </div>
+  </div>
+</div>`;
+
+  document.body.insertAdjacentHTML('beforeend', MODAL_HTML);
+
+  const overlay = document.getElementById('gradeModalOverlay');
+  const closeBtn = document.getElementById('gradeModalClose');
+
+  function openModal(){ overlay.classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeModal(){ overlay.classList.remove('open'); document.body.style.overflow=''; }
+
+  // ปิดเมื่อกด X
+  closeBtn.addEventListener('click', closeModal);
+  // ปิดเมื่อคลิก overlay (นอกกล่อง)
+  overlay.addEventListener('click', e=>{ if(e.target===overlay) closeModal(); });
+  // ปิดเมื่อกด Escape
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+
+  // 2. inject ปุ่ม "📊 ดูเกรด" ใต้การ์ดวิชาทุกใบ
+  function injectGradeBtn(){
+    document.querySelectorAll('.course:not([data-gb])').forEach(card=>{
+      card.setAttribute('data-gb','1');
+      const btn = document.createElement('button');
+      btn.className='grade-open-btn';
+      btn.type='button';
+      btn.innerHTML='<span class="gb-ico">📊</span> ดูตารางอักษรลำดับขั้น (เกรด)';
+      btn.addEventListener('click', e=>{ e.stopPropagation(); openModal(); });
+      card.appendChild(btn);
+    });
+  }
+
+  injectGradeBtn();
+  // re-inject เมื่อ prog switch สร้างการ์ดใหม่
+  new MutationObserver(injectGradeBtn)
+    .observe(document.querySelector('main')||document.body,{childList:true,subtree:true});
+
+})();
+
 /* ===== COOP TAB INTERACTIONS ===== */
 (function(){
   // ---- FAQ accordion ----
@@ -5417,7 +5609,7 @@
     if(!spyTicking){spyTicking=true;requestAnimationFrame(spy);}
   },{passive:true});
 
-  // reset เป็นลิงก์แรกตอนเพิ่งเข้าแท็บ
+  // reset quick-nav ตัวแรกเป็น active เมื่อเข้าแท็บสหกิจ
   window.__resetCoopNav__=()=>{
     navLinks.forEach((a,i)=>a.classList.toggle('active',i===0));
   };
